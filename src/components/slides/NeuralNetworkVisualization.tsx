@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Brain, Activity, TrendingUp } from 'lucide-react';
+import { Brain, Activity, TrendingUp, Play } from 'lucide-react';
 
 interface NeuronProps {
   id: string;
@@ -36,24 +36,60 @@ const Connection = ({ x1, y1, x2, y2, isActive }: { x1: number; y1: number; x2: 
   const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);
 
   return (
-    <div
-      className={`absolute origin-left transition-all duration-500 ${
-        isActive ? 'bg-medical-blue opacity-60' : 'bg-gray-200 opacity-30'
-      }`}
+    <svg
+      className="absolute pointer-events-none"
       style={{
         left: x1 + 12,
         top: y1 + 12,
-        width: length,
-        height: 1,
+        width: length + 20,
+        height: 20,
         transform: `rotate(${angle}deg)`,
+        transformOrigin: '0 10px'
       }}
-    />
+    >
+      <defs>
+        <marker
+          id={`arrowhead-${isActive ? 'active' : 'inactive'}`}
+          markerWidth="10"
+          markerHeight="7"
+          refX="9"
+          refY="3.5"
+          orient="auto"
+          className={isActive ? 'text-medical-blue' : 'text-gray-300'}
+        >
+          <polygon
+            points="0 0, 10 3.5, 0 7"
+            fill="currentColor"
+          />
+        </marker>
+      </defs>
+      <line
+        x1="0"
+        y1="10"
+        x2={length}
+        y2="10"
+        stroke={isActive ? 'hsl(var(--medical-blue))' : '#e5e7eb'}
+        strokeWidth={isActive ? "2" : "1"}
+        markerEnd={`url(#arrowhead-${isActive ? 'active' : 'inactive'})`}
+        className={`transition-all duration-500 ${isActive ? 'opacity-80' : 'opacity-30'}`}
+      />
+      {isActive && (
+        <circle
+          cx="0"
+          cy="10"
+          r="2"
+          fill="hsl(var(--medical-blue))"
+          className="animate-ping"
+        />
+      )}
+    </svg>
   );
 };
 
 const NeuralNetworkVisualization = () => {
   const [activeNeurons, setActiveNeurons] = useState<Set<string>>(new Set());
   const [isAnimating, setIsAnimating] = useState(false);
+  const [currentSimulation, setCurrentSimulation] = useState(0);
 
   const inputNeurons = Array.from({ length: 7 }, (_, i) => ({
     id: `input-${i}`,
@@ -92,33 +128,79 @@ const NeuralNetworkVisualization = () => {
 
   const allNeurons = [...inputNeurons, ...hidden1Neurons, ...hidden2Neurons, ...hidden3Neurons, ...outputNeurons];
 
+  const simulations = [
+    {
+      name: "Pacient risc scăzut",
+      sequence: [
+        { inputs: [0, 3], hidden1: [1, 4, 7], hidden2: [2, 5], hidden3: [1], outputs: [0] },
+      ]
+    },
+    {
+      name: "Pacient risc moderat", 
+      sequence: [
+        { inputs: [1, 2, 4, 5], hidden1: [0, 2, 5, 7, 8], hidden2: [1, 3, 6], hidden3: [0, 2], outputs: [1] },
+      ]
+    },
+    {
+      name: "Pacient risc crescut",
+      sequence: [
+        { inputs: [0, 1, 2, 4, 5, 6], hidden1: [1, 3, 4, 6, 7, 8, 9], hidden2: [0, 2, 4, 6, 7], hidden3: [1, 2, 3], outputs: [2] },
+      ]
+    }
+  ];
+
   const animate = () => {
     setIsAnimating(true);
-    let step = 0;
-    const layers = [inputNeurons, hidden1Neurons, hidden2Neurons, hidden3Neurons, outputNeurons];
-
-    const animateLayer = (layerIndex: number) => {
-      if (layerIndex >= layers.length) {
+    const currentSim = simulations[currentSimulation];
+    
+    // Reset all neurons
+    setActiveNeurons(new Set());
+    
+    let stepIndex = 0;
+    const animateStep = () => {
+      if (stepIndex >= currentSim.sequence.length) {
         setTimeout(() => {
           setActiveNeurons(new Set());
           setIsAnimating(false);
-        }, 1000);
+          setCurrentSimulation((prev) => (prev + 1) % simulations.length);
+        }, 2000);
         return;
       }
 
-      const currentLayer = layers[layerIndex];
-      const newActive = new Set(activeNeurons);
-      
-      currentLayer.forEach(neuron => {
-        newActive.add(neuron.id);
-      });
-      
-      setActiveNeurons(new Set(newActive));
-      
-      setTimeout(() => animateLayer(layerIndex + 1), 800);
+      const step = currentSim.sequence[stepIndex];
+      const newActive = new Set<string>();
+
+      // Activate neurons progressively
+      setTimeout(() => {
+        step.inputs.forEach(i => newActive.add(`input-${i}`));
+        setActiveNeurons(new Set(newActive));
+      }, 0);
+
+      setTimeout(() => {
+        step.hidden1.forEach(i => newActive.add(`hidden1-${i}`));
+        setActiveNeurons(new Set(newActive));
+      }, 400);
+
+      setTimeout(() => {
+        step.hidden2.forEach(i => newActive.add(`hidden2-${i}`));
+        setActiveNeurons(new Set(newActive));
+      }, 800);
+
+      setTimeout(() => {
+        step.hidden3.forEach(i => newActive.add(`hidden3-${i}`));
+        setActiveNeurons(new Set(newActive));
+      }, 1200);
+
+      setTimeout(() => {
+        step.outputs.forEach(i => newActive.add(`output-${i}`));
+        setActiveNeurons(new Set(newActive));
+      }, 1600);
+
+      stepIndex++;
+      setTimeout(animateStep, 2400);
     };
 
-    animateLayer(0);
+    animateStep();
   };
 
   const getConnections = () => {
@@ -182,14 +264,27 @@ const NeuralNetworkVisualization = () => {
   return (
     <div className="bg-card rounded-2xl p-6 shadow-card">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-bold">Arhitectura Detaliată - Rețea Neuronală</h3>
-        <button
-          onClick={animate}
-          disabled={isAnimating}
-          className="px-4 py-2 bg-medical-blue text-white rounded-lg hover:bg-medical-blue/80 disabled:opacity-50 transition-colors"
-        >
-          {isAnimating ? 'În procesare...' : 'Simulează Predicția'}
-        </button>
+        <div>
+          <h3 className="text-xl font-bold">Arhitectura Detaliată - Rețea Neuronală</h3>
+          {isAnimating && (
+            <p className="text-sm text-muted-foreground mt-1">
+              Simulare: {simulations[currentSimulation].name}
+            </p>
+          )}
+        </div>
+        <div className="flex items-center space-x-3">
+          <div className="text-sm text-muted-foreground">
+            Simulare {currentSimulation + 1}/{simulations.length}
+          </div>
+          <button
+            onClick={animate}
+            disabled={isAnimating}
+            className="flex items-center space-x-2 px-4 py-2 bg-medical-blue text-white rounded-lg hover:bg-medical-blue/80 disabled:opacity-50 transition-colors"
+          >
+            <Play className="w-4 h-4" />
+            <span>{isAnimating ? 'În procesare...' : 'Simulează Predicția'}</span>
+          </button>
+        </div>
       </div>
 
       {/* Network Visualization */}
@@ -212,11 +307,28 @@ const NeuralNetworkVisualization = () => {
         ))}
 
         {/* Layer Labels */}
-        <div className="absolute top-2 left-12 text-sm font-medium text-medical-blue">Input</div>
-        <div className="absolute top-2 left-44 text-sm font-medium text-medical-green">Ascuns 1</div>
-        <div className="absolute top-2 left-80 text-sm font-medium text-medical-orange">Ascuns 2</div>
-        <div className="absolute top-2 left-52 text-sm font-medium text-medical-red">Ascuns 3</div>
-        <div className="absolute top-2 right-12 text-sm font-medium text-medical-purple">Ieșire</div>
+        <div className="absolute top-2 left-8 text-sm font-medium text-medical-blue bg-white/90 px-2 py-1 rounded">Input Layer</div>
+        <div className="absolute top-2 left-44 text-sm font-medium text-medical-green bg-white/90 px-2 py-1 rounded">Hidden 1 (64)</div>
+        <div className="absolute top-2 left-80 text-sm font-medium text-medical-orange bg-white/90 px-2 py-1 rounded">Hidden 2 (32)</div>
+        <div className="absolute top-2 left-[480px] text-sm font-medium text-medical-red bg-white/90 px-2 py-1 rounded">Hidden 3 (16)</div>
+        <div className="absolute top-2 right-8 text-sm font-medium text-medical-purple bg-white/90 px-2 py-1 rounded">Output Layer</div>
+        
+        {/* Risk Level Labels */}
+        {activeNeurons.has('output-0') && (
+          <div className="absolute right-4 top-20 text-sm font-medium text-medical-blue bg-green-100 px-3 py-2 rounded-lg border-l-4 border-green-500">
+            RISC SCĂZUT
+          </div>
+        )}
+        {activeNeurons.has('output-1') && (
+          <div className="absolute right-4 top-20 text-sm font-medium text-medical-orange bg-yellow-100 px-3 py-2 rounded-lg border-l-4 border-yellow-500">
+            RISC MODERAT
+          </div>
+        )}
+        {activeNeurons.has('output-2') && (
+          <div className="absolute right-4 top-20 text-sm font-medium text-medical-red bg-red-100 px-3 py-2 rounded-lg border-l-4 border-red-500">
+            RISC CRESCUT
+          </div>
+        )}
       </div>
 
       {/* Layer Details */}

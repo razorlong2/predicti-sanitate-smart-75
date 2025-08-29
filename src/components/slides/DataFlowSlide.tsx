@@ -218,40 +218,6 @@ const DataFlowSlide = () => {
         </div>
       </div>
 
-      {/* Processing Flow */}
-      <div className="bg-gradient-medical rounded-2xl p-8 text-white">
-        <h2 className="text-2xl font-bold mb-6 text-center">Fluxul de Preprocesare</h2>
-        <div className="grid md:grid-cols-4 gap-6">
-          <div className="text-center space-y-2">
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto">
-              <span className="font-bold">1</span>
-            </div>
-            <h4 className="font-semibold">Curățare Date</h4>
-            <p className="text-sm text-white/80">Eliminare valori lipsa</p>
-          </div>
-          <div className="text-center space-y-2">
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto">
-              <span className="font-bold">2</span>
-            </div>
-            <h4 className="font-semibold">Normalizare</h4>
-            <p className="text-sm text-white/80">Scalare 0-1, log transform</p>
-          </div>
-          <div className="text-center space-y-2">
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto">
-              <span className="font-bold">3</span>
-            </div>
-            <h4 className="font-semibold">Codificare</h4>
-            <p className="text-sm text-white/80">One-hot encoding</p>
-          </div>
-          <div className="text-center space-y-2">
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto">
-              <span className="font-bold">4</span>
-            </div>
-            <h4 className="font-semibold">Analiză Temporală</h4>
-            <p className="text-sm text-white/80">Trend-uri, delta valori</p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

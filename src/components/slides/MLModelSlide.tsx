@@ -148,8 +148,6 @@ const MLModelSlide = () => {
         </div>
       </div>
 
-      {/* Detailed Architecture */}
-      <NeuralNetworkVisualization />
     </div>
   );
 };
