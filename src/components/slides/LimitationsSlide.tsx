@@ -1,4 +1,4 @@
-import { AlertTriangle, Shield, Scale, Clock, Database, Users } from "lucide-react";
+import { AlertTriangle, Shield, Scale, Clock, Database, Users, TrendingUp } from "lucide-react";
 
 const LimitationsSlide = () => {
   return (
@@ -249,7 +249,7 @@ const LimitationsSlide = () => {
           </div>
           <div className="space-y-2">
             <p><strong>Plan de contingență:</strong> Funcționare în mod degradat</p>
-            <p><strong>Actualizări de securitate:</strong> Patch management automat</strong></p>
+            <p><strong>Actualizări de securitate:</strong> Patch management automat</p>
             <p><strong>Business continuity:</strong> Planuri de recuperare în caz de dezastru</p>
           </div>
         </div>

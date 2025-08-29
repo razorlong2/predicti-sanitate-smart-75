@@ -6,10 +6,6 @@ const TitleSlide = () => {
       <div className="text-center max-w-4xl mx-auto space-y-8 animate-float-up">
         {/* Main Title */}
         <div className="space-y-4">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-medical rounded-full text-white text-sm font-medium shadow-medical">
-            <Brain className="w-4 h-4 mr-2" />
-            Proiect Doctoral
-          </div>
           
           <h1 className="text-5xl md:text-6xl font-bold bg-gradient-medical bg-clip-text text-transparent leading-tight">
             Predicția IAAM
@@ -58,8 +54,8 @@ const TitleSlide = () => {
         {/* Subtitle */}
         <div className="pt-8 border-t border-border/50">
           <p className="text-lg text-muted-foreground">
-            <strong className="text-medical-blue">Soluția:</strong> Un algoritm AI care analizează în timp real factorii de risc individuali și instituționali, 
-            oferind <strong className="text-medical-green">predicții precise</strong> și <strong className="text-medical-orange">recomandări automate</strong> pentru prevenția IAAM.
+            <strong className="text-medical-blue">Obiectiv:</strong> Reducerea incidenței IAAM cu <strong className="text-medical-green">&gt;20%</strong> prin 
+            <strong className="text-medical-orange">predicție automată</strong> și <strong className="text-medical-blue">intervenție preventivă personalizată</strong>
           </p>
         </div>
       </div>
