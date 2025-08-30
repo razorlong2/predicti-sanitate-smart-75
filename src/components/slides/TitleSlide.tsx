@@ -54,7 +54,7 @@ const TitleSlide = () => {
         {/* Subtitle */}
         <div className="pt-8 border-t border-border/50">
           <p className="text-lg text-muted-foreground">
-            <strong className="text-medical-blue">Obiectiv:</strong> Reducerea incidenței IAAM prin 
+            <strong className="text-medical-blue">Obiectiv:</strong> Reducerea incidenței IAAM prin {' '}
             <strong className="text-medical-orange">detecție precoce</strong> și <strong className="text-medical-blue">intervenție preventivă personalizată</strong>
           </p>
         </div>
