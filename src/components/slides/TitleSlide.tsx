@@ -46,7 +46,7 @@ const TitleSlide = () => {
             </div>
             <h3 className="font-semibold text-lg">Precizie Ridicată</h3>
             <p className="text-muted-foreground text-sm">
-              Sensibilitate &gt;85%, Specificitate &gt;80%
+              Detecție precoce cu sensibilitate &gt;85%, specificitate &gt;80%
             </p>
           </div>
         </div>
@@ -54,8 +54,8 @@ const TitleSlide = () => {
         {/* Subtitle */}
         <div className="pt-8 border-t border-border/50">
           <p className="text-lg text-muted-foreground">
-            <strong className="text-medical-blue">Obiectiv:</strong> Reducerea incidenței IAAM cu <strong className="text-medical-green">&gt;20%</strong> prin 
-            <strong className="text-medical-orange">predicție automată</strong> și <strong className="text-medical-blue">intervenție preventivă personalizată</strong>
+            <strong className="text-medical-blue">Obiectiv:</strong> Reducerea incidenței IAAM prin 
+            <strong className="text-medical-orange">detecție precoce</strong> și <strong className="text-medical-blue">intervenție preventivă personalizată</strong>
           </p>
         </div>
       </div>

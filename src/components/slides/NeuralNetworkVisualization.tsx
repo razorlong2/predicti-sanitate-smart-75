@@ -1,5 +1,96 @@
 import { useState, useEffect } from 'react';
-import { Brain, Activity, TrendingUp, Play } from 'lucide-react';
+import { Brain, Activity, TrendingUp, Play, AlertTriangle, Info } from 'lucide-react';
+
+interface ScenarioData {
+  id: number;
+  title: string;
+  description: string;
+  details: string[];
+  riskEvolution: number[];
+  alert: string;
+  color: string;
+}
+
+const scenarios: ScenarioData[] = [
+  {
+    id: 1,
+    title: "PACIENT VÂRSTNIC CARDIAC",
+    description: "Bărbat 78 ani, diabet tip 2 decompensat",
+    details: [
+      "Cateter venos central de 4 zile pentru tratament",
+      "Glicemie oscilantă 180-320 mg/dL, HbA1c 9.2%",
+      "CRP în creștere: 45→89→156 mg/L"
+    ],
+    riskEvolution: [15, 42, 67],
+    alert: "Risc bacteriemie asociată cateter",
+    color: "bg-blue-500"
+  },
+  {
+    id: 2,
+    title: "POST-OPERATOR CARDIAC COMPLEX",
+    description: "Femeie 65 ani, bypass coronarian triplu",
+    details: [
+      "Ventilație mecanică prelungită >48 ore",
+      "CRP 120 mg/L, PCT 2.8 ng/mL, leucocite 18.500",
+      "Secreții traheale purulente, febră 38.3°C"
+    ],
+    riskEvolution: [22, 51, 78],
+    alert: "Risc pneumonie asociată ventilației",
+    color: "bg-green-500"
+  },
+  {
+    id: 3,
+    title: "INFECȚIE URINARĂ COMPLICATĂ",
+    description: "Bărbat 72 ani, adenom prostată, retenție acută",
+    details: [
+      "Sondă urinară de 6 zile, urină tulbure",
+      "Urocultură anterioară: E.coli ESBL+",
+      "Piurie marcată, hematurie microscopică"
+    ],
+    riskEvolution: [18, 38, 56],
+    alert: "Risc infecție urinară rezistentă",
+    color: "bg-yellow-500"
+  },
+  {
+    id: 4,
+    title: "PACIENT ONCOLOGIC NEUTROPENIC",
+    description: "Leucemie acută, post-chimioterapie",
+    details: [
+      "Neutropenie severă <500/mm³ de 5 zile",
+      "Febră 38.8°C, frison, hipotensiune",
+      "Mucozită grad 3, port-a-cath prezent"
+    ],
+    riskEvolution: [45, 72, 89],
+    alert: "Risc sepsis cu neutropenie febrilă",
+    color: "bg-red-500"
+  },
+  {
+    id: 5,
+    title: "ARSURI MAJORE",
+    description: "Arsuri grad II-III pe 45% suprafață corporală",
+    details: [
+      "Intubare orotraheală, ventilație invazivă",
+      "Edem generalizat, hipoalbuminemie severă",
+      "Escare multiple, risc colonizare Pseudomonas"
+    ],
+    riskEvolution: [38, 65, 84],
+    alert: "Risc infecție plăgi și sepsis",
+    color: "bg-orange-500"
+  },
+  {
+    id: 6,
+    title: "POLITRAUMĂ SEVERĂ",
+    description: "ISS 35, fractură bazin, contuzie pulmonară",
+    details: [
+      "CVC, sondă urinară, dren toracic, fixator extern",
+      "Transfuzii masive: 8 unități masă eritrocitară",
+      "Coagulopatie, hipotermie, acidoză"
+    ],
+    riskEvolution: [28, 58, 76],
+    alert: "Risc infecții multiple site-uri",
+    color: "bg-purple-500"
+  }
+];
 
 interface NeuronProps {
   id: string;
@@ -7,26 +98,37 @@ interface NeuronProps {
   y: number;
   isActive: boolean;
   layer: string;
+  size?: 'small' | 'medium' | 'large';
 }
 
-const Neuron = ({ x, y, isActive, layer }: NeuronProps) => {
+const Neuron = ({ x, y, isActive, layer, size = 'medium' }: NeuronProps) => {
   const getColor = () => {
     switch (layer) {
-      case 'input': return isActive ? 'bg-medical-blue' : 'bg-gray-300';
-      case 'hidden1': return isActive ? 'bg-medical-green' : 'bg-gray-300';
-      case 'hidden2': return isActive ? 'bg-medical-orange' : 'bg-gray-300';
-      case 'hidden3': return isActive ? 'bg-medical-red' : 'bg-gray-300';
-      case 'output': return isActive ? 'bg-medical-purple' : 'bg-gray-300';
+      case 'input': return isActive ? 'bg-gradient-to-r from-blue-400 to-blue-600' : 'bg-gray-300';
+      case 'hidden1': return isActive ? 'bg-gradient-to-r from-green-400 to-green-600' : 'bg-gray-300';
+      case 'hidden2': return isActive ? 'bg-gradient-to-r from-yellow-400 to-orange-500' : 'bg-gray-300';
+      case 'hidden3': return isActive ? 'bg-gradient-to-r from-orange-500 to-red-500' : 'bg-gray-300';
+      case 'output': return isActive ? 'bg-gradient-to-r from-red-500 to-pink-600' : 'bg-gray-300';
       default: return 'bg-gray-300';
+    }
+  };
+
+  const getSizeClass = () => {
+    switch (size) {
+      case 'small': return 'w-4 h-4';
+      case 'large': return 'w-8 h-8';
+      default: return 'w-6 h-6';
     }
   };
 
   return (
     <div
-      className={`absolute w-6 h-6 rounded-full ${getColor()} transition-all duration-500 flex items-center justify-center text-white text-xs font-bold shadow-lg`}
+      className={`absolute ${getSizeClass()} rounded-full ${getColor()} transition-all duration-500 flex items-center justify-center text-white text-xs font-bold shadow-lg ${
+        isActive ? 'animate-pulse shadow-xl scale-110' : ''
+      }`}
       style={{ left: x, top: y }}
     >
-      {isActive && layer === 'output' && '1'}
+      {isActive && layer === 'output' && '!'}
     </div>
   );
 };
@@ -48,37 +150,26 @@ const Connection = ({ x1, y1, x2, y2, isActive }: { x1: number; y1: number; x2: 
       }}
     >
       <defs>
-        <marker
-          id={`arrowhead-${isActive ? 'active' : 'inactive'}`}
-          markerWidth="10"
-          markerHeight="7"
-          refX="9"
-          refY="3.5"
-          orient="auto"
-          className={isActive ? 'text-medical-blue' : 'text-gray-300'}
-        >
-          <polygon
-            points="0 0, 10 3.5, 0 7"
-            fill="currentColor"
-          />
-        </marker>
+        <linearGradient id={`gradient-${isActive ? 'active' : 'inactive'}`} x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor={isActive ? '#3b82f6' : '#e5e7eb'} />
+          <stop offset="100%" stopColor={isActive ? '#ef4444' : '#e5e7eb'} />
+        </linearGradient>
       </defs>
       <line
         x1="0"
         y1="10"
         x2={length}
         y2="10"
-        stroke={isActive ? 'hsl(var(--medical-blue))' : '#e5e7eb'}
-        strokeWidth={isActive ? "2" : "1"}
-        markerEnd={`url(#arrowhead-${isActive ? 'active' : 'inactive'})`}
-        className={`transition-all duration-500 ${isActive ? 'opacity-80' : 'opacity-30'}`}
+        stroke={`url(#gradient-${isActive ? 'active' : 'inactive'})`}
+        strokeWidth={isActive ? "3" : "1"}
+        className={`transition-all duration-500 ${isActive ? 'opacity-80' : 'opacity-20'}`}
       />
       {isActive && (
         <circle
-          cx="0"
+          cx="10"
           cy="10"
-          r="2"
-          fill="hsl(var(--medical-blue))"
+          r="3"
+          fill="#3b82f6"
           className="animate-ping"
         />
       )}
@@ -89,126 +180,85 @@ const Connection = ({ x1, y1, x2, y2, isActive }: { x1: number; y1: number; x2: 
 const NeuralNetworkVisualization = () => {
   const [activeNeurons, setActiveNeurons] = useState<Set<string>>(new Set());
   const [isAnimating, setIsAnimating] = useState(false);
-  const [currentSimulation, setCurrentSimulation] = useState(0);
+  const [currentScenario, setCurrentScenario] = useState<number | null>(null);
+  const [selectedScenario, setSelectedScenario] = useState<ScenarioData | null>(null);
 
-  const inputNeurons = Array.from({ length: 7 }, (_, i) => ({
+  // Neural network structure - more organic positioning
+  const inputNeurons = Array.from({ length: 25 }, (_, i) => ({
     id: `input-${i}`,
-    x: 50,
-    y: 50 + i * 40,
+    x: 50 + Math.sin(i * 0.3) * 10,
+    y: 20 + i * 12 + Math.cos(i * 0.5) * 5,
     layer: 'input'
   }));
 
-  const hidden1Neurons = Array.from({ length: 10 }, (_, i) => ({
+  const hidden1Neurons = Array.from({ length: 64 }, (_, i) => ({
     id: `hidden1-${i}`,
-    x: 200,
-    y: 30 + i * 30,
+    x: 180 + Math.sin(i * 0.2) * 15,
+    y: 10 + i * 5 + Math.cos(i * 0.3) * 8,
     layer: 'hidden1'
   }));
 
-  const hidden2Neurons = Array.from({ length: 8 }, (_, i) => ({
+  const hidden2Neurons = Array.from({ length: 32 }, (_, i) => ({
     id: `hidden2-${i}`,
-    x: 350,
-    y: 50 + i * 35,
+    x: 320 + Math.sin(i * 0.4) * 12,
+    y: 30 + i * 10 + Math.cos(i * 0.6) * 6,
     layer: 'hidden2'
   }));
 
-  const hidden3Neurons = Array.from({ length: 4 }, (_, i) => ({
+  const hidden3Neurons = Array.from({ length: 16 }, (_, i) => ({
     id: `hidden3-${i}`,
-    x: 500,
-    y: 80 + i * 50,
+    x: 460 + Math.sin(i * 0.3) * 8,
+    y: 50 + i * 20 + Math.cos(i * 0.4) * 4,
     layer: 'hidden3'
   }));
 
   const outputNeurons = Array.from({ length: 3 }, (_, i) => ({
     id: `output-${i}`,
-    x: 650,
+    x: 600,
     y: 100 + i * 60,
     layer: 'output'
   }));
 
   const allNeurons = [...inputNeurons, ...hidden1Neurons, ...hidden2Neurons, ...hidden3Neurons, ...outputNeurons];
 
-  const simulations = [
-    {
-      name: "Pacient risc scăzut",
-      sequence: [
-        { inputs: [0, 3], hidden1: [1, 4, 7], hidden2: [2, 5], hidden3: [1], outputs: [0] },
-      ]
-    },
-    {
-      name: "Pacient risc moderat", 
-      sequence: [
-        { inputs: [1, 2, 4, 5], hidden1: [0, 2, 5, 7, 8], hidden2: [1, 3, 6], hidden3: [0, 2], outputs: [1] },
-      ]
-    },
-    {
-      name: "Pacient risc crescut",
-      sequence: [
-        { inputs: [0, 1, 2, 4, 5, 6], hidden1: [1, 3, 4, 6, 7, 8, 9], hidden2: [0, 2, 4, 6, 7], hidden3: [1, 2, 3], outputs: [2] },
-      ]
-    }
-  ];
-
-  const animate = () => {
+  const simulateScenario = (scenarioId: number) => {
     setIsAnimating(true);
-    const currentSim = simulations[currentSimulation];
-    
-    // Reset all neurons
+    setCurrentScenario(scenarioId);
     setActiveNeurons(new Set());
-    
-    let stepIndex = 0;
-    const animateStep = () => {
-      if (stepIndex >= currentSim.sequence.length) {
-        setTimeout(() => {
-          setActiveNeurons(new Set());
-          setIsAnimating(false);
-          setCurrentSimulation((prev) => (prev + 1) % simulations.length);
-        }, 2000);
-        return;
-      }
 
-      const step = currentSim.sequence[stepIndex];
-      const newActive = new Set<string>();
+    // Simulate data flow through network
+    const steps = [
+      { delay: 0, neurons: inputNeurons.slice(0, 15).map(n => n.id) },
+      { delay: 500, neurons: hidden1Neurons.slice(0, 40).map(n => n.id) },
+      { delay: 1000, neurons: hidden2Neurons.slice(0, 20).map(n => n.id) },
+      { delay: 1500, neurons: hidden3Neurons.slice(0, 10).map(n => n.id) },
+      { delay: 2000, neurons: [`output-${Math.floor(scenarios[scenarioId - 1].riskEvolution[2] / 34)}`] }
+    ];
 
-      // Activate neurons progressively
+    steps.forEach(step => {
       setTimeout(() => {
-        step.inputs.forEach(i => newActive.add(`input-${i}`));
-        setActiveNeurons(new Set(newActive));
-      }, 0);
+        setActiveNeurons(prev => new Set([...prev, ...step.neurons]));
+      }, step.delay);
+    });
 
-      setTimeout(() => {
-        step.hidden1.forEach(i => newActive.add(`hidden1-${i}`));
-        setActiveNeurons(new Set(newActive));
-      }, 400);
+    setTimeout(() => {
+      setIsAnimating(false);
+      setCurrentScenario(null);
+    }, 3000);
+  };
 
-      setTimeout(() => {
-        step.hidden2.forEach(i => newActive.add(`hidden2-${i}`));
-        setActiveNeurons(new Set(newActive));
-      }, 800);
-
-      setTimeout(() => {
-        step.hidden3.forEach(i => newActive.add(`hidden3-${i}`));
-        setActiveNeurons(new Set(newActive));
-      }, 1200);
-
-      setTimeout(() => {
-        step.outputs.forEach(i => newActive.add(`output-${i}`));
-        setActiveNeurons(new Set(newActive));
-      }, 1600);
-
-      stepIndex++;
-      setTimeout(animateStep, 2400);
-    };
-
-    animateStep();
+  const simulateAllScenarios = () => {
+    scenarios.forEach((scenario, index) => {
+      setTimeout(() => simulateScenario(scenario.id), index * 500);
+    });
   };
 
   const getConnections = () => {
     const connections: Array<{ x1: number; y1: number; x2: number; y2: number; isActive: boolean }> = [];
     
-    // Input to Hidden1
-    inputNeurons.forEach(input => {
-      hidden1Neurons.forEach(hidden => {
+    // Sample connections for visual effect
+    inputNeurons.slice(0, 8).forEach((input, i) => {
+      hidden1Neurons.slice(i * 3, (i + 1) * 3).forEach(hidden => {
         connections.push({
           x1: input.x,
           y1: input.y,
@@ -219,145 +269,154 @@ const NeuralNetworkVisualization = () => {
       });
     });
 
-    // Hidden1 to Hidden2
-    hidden1Neurons.forEach(h1 => {
-      hidden2Neurons.forEach(h2 => {
-        connections.push({
-          x1: h1.x,
-          y1: h1.y,
-          x2: h2.x,
-          y2: h2.y,
-          isActive: activeNeurons.has(h1.id) && activeNeurons.has(h2.id)
-        });
-      });
-    });
-
-    // Hidden2 to Hidden3
-    hidden2Neurons.forEach(h2 => {
-      hidden3Neurons.forEach(h3 => {
-        connections.push({
-          x1: h2.x,
-          y1: h2.y,
-          x2: h3.x,
-          y2: h3.y,
-          isActive: activeNeurons.has(h2.id) && activeNeurons.has(h3.id)
-        });
-      });
-    });
-
-    // Hidden3 to Output
-    hidden3Neurons.forEach(h3 => {
-      outputNeurons.forEach(output => {
-        connections.push({
-          x1: h3.x,
-          y1: h3.y,
-          x2: output.x,
-          y2: output.y,
-          isActive: activeNeurons.has(h3.id) && activeNeurons.has(output.id)
-        });
-      });
-    });
-
     return connections;
   };
 
   return (
-    <div className="bg-card rounded-2xl p-6 shadow-card">
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h3 className="text-xl font-bold">Arhitectura Detaliată - Rețea Neuronală</h3>
-          {isAnimating && (
-            <p className="text-sm text-muted-foreground mt-1">
-              Simulare: {simulations[currentSimulation].name}
-            </p>
-          )}
-        </div>
-        <div className="flex items-center space-x-3">
-          <div className="text-sm text-muted-foreground">
-            Simulare {currentSimulation + 1}/{simulations.length}
-          </div>
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="text-center">
+        <h1 className="text-4xl font-bold bg-gradient-medical bg-clip-text text-transparent mb-4">
+          Arhitectura Rețelei Neuronale - Simulare Live
+        </h1>
+        <p className="text-xl text-muted-foreground">
+          Vizualizare interactivă a procesării datelor clinice
+        </p>
+      </div>
+
+      {/* Neural Network Visualization */}
+      <div className="bg-gradient-to-br from-background via-secondary/20 to-background rounded-2xl p-8 border shadow-lg">
+        <div className="flex justify-between items-center mb-6">
+          <div className="text-lg font-semibold">Procesare în timp real</div>
           <button
-            onClick={animate}
+            onClick={simulateAllScenarios}
             disabled={isAnimating}
-            className="flex items-center space-x-2 px-4 py-2 bg-medical-blue text-white rounded-lg hover:bg-medical-blue/80 disabled:opacity-50 transition-colors"
+            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 transition-all transform hover:scale-105 shadow-lg"
           >
-            <Play className="w-4 h-4" />
-            <span>{isAnimating ? 'În procesare...' : 'Simulează Predicția'}</span>
+            <Play className="w-5 h-5" />
+            <span>▶ SIMULEAZĂ TOATE SCENARIILE</span>
           </button>
         </div>
+
+        {/* Network Visualization */}
+        <div className="relative w-full h-96 bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl border-2 border-dashed border-blue-200 overflow-hidden">
+          {/* Connections */}
+          {getConnections().map((conn, index) => (
+            <Connection key={index} {...conn} />
+          ))}
+
+          {/* Neurons */}
+          {allNeurons.map(neuron => (
+            <Neuron
+              key={neuron.id}
+              id={neuron.id}
+              x={neuron.x}
+              y={neuron.y}
+              isActive={activeNeurons.has(neuron.id)}
+              layer={neuron.layer}
+              size={neuron.layer === 'output' ? 'large' : neuron.layer === 'input' ? 'medium' : 'small'}
+            />
+          ))}
+
+          {/* Layer Labels */}
+          <div className="absolute top-4 left-4 space-y-2">
+            <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">INPUT (25 parametri)</div>
+            <div className="text-xs text-gray-600">Demografici • Comorbidități • Biomarkeri • Dispozitive • Antibiotice</div>
+          </div>
+          
+          <div className="absolute top-4 left-32 space-y-2">
+            <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">HIDDEN 1 (64)</div>
+            <div className="text-xs text-gray-600">Pattern-uri primare</div>
+          </div>
+          
+          <div className="absolute top-4 left-72 space-y-2">
+            <div className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">HIDDEN 2 (32)</div>
+            <div className="text-xs text-gray-600">Corelații complexe</div>
+          </div>
+          
+          <div className="absolute top-4 left-96 space-y-2">
+            <div className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">HIDDEN 3 (16)</div>
+            <div className="text-xs text-gray-600">Sinteză finală</div>
+          </div>
+          
+          <div className="absolute top-4 right-4 space-y-2">
+            <div className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">OUTPUT</div>
+            <div className="text-xs text-gray-600">Risc • Categorie • Timp critic</div>
+          </div>
+
+          {/* Real-time info panel */}
+          {isAnimating && (
+            <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg border">
+              <div className="flex items-center space-x-2 text-sm">
+                <Activity className="w-4 h-4 text-blue-500 animate-pulse" />
+                <span className="font-medium">Procesare activă</span>
+              </div>
+              <div className="text-xs text-gray-600 mt-1">
+                150+ parametri • 10k+ conexiuni • &lt;2s/pacient
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Network Visualization */}
-      <div className="relative w-full h-96 bg-gradient-to-br from-background/50 to-secondary/20 rounded-xl border overflow-hidden">
-        {/* Connections */}
-        {getConnections().map((conn, index) => (
-          <Connection key={index} {...conn} />
-        ))}
-
-        {/* Neurons */}
-        {allNeurons.map(neuron => (
-          <Neuron
-            key={neuron.id}
-            id={neuron.id}
-            x={neuron.x}
-            y={neuron.y}
-            isActive={activeNeurons.has(neuron.id)}
-            layer={neuron.layer}
-          />
-        ))}
-
-        {/* Layer Labels */}
-        <div className="absolute top-2 left-8 text-sm font-medium text-medical-blue bg-white/90 px-2 py-1 rounded">Input Layer</div>
-        <div className="absolute top-2 left-44 text-sm font-medium text-medical-green bg-white/90 px-2 py-1 rounded">Hidden 1 (64)</div>
-        <div className="absolute top-2 left-80 text-sm font-medium text-medical-orange bg-white/90 px-2 py-1 rounded">Hidden 2 (32)</div>
-        <div className="absolute top-2 left-[480px] text-sm font-medium text-medical-red bg-white/90 px-2 py-1 rounded">Hidden 3 (16)</div>
-        <div className="absolute top-2 right-8 text-sm font-medium text-medical-purple bg-white/90 px-2 py-1 rounded">Output Layer</div>
+      {/* Clinical Scenarios */}
+      <div className="space-y-6">
+        <h2 className="text-2xl font-bold text-center">Simulări Clinice Detaliate</h2>
         
-        {/* Risk Level Labels */}
-        {activeNeurons.has('output-0') && (
-          <div className="absolute right-4 top-20 text-sm font-medium text-medical-blue bg-green-100 px-3 py-2 rounded-lg border-l-4 border-green-500">
-            RISC SCĂZUT
-          </div>
-        )}
-        {activeNeurons.has('output-1') && (
-          <div className="absolute right-4 top-20 text-sm font-medium text-medical-orange bg-yellow-100 px-3 py-2 rounded-lg border-l-4 border-yellow-500">
-            RISC MODERAT
-          </div>
-        )}
-        {activeNeurons.has('output-2') && (
-          <div className="absolute right-4 top-20 text-sm font-medium text-medical-red bg-red-100 px-3 py-2 rounded-lg border-l-4 border-red-500">
-            RISC CRESCUT
-          </div>
-        )}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {scenarios.map((scenario) => (
+            <div
+              key={scenario.id}
+              className={`bg-card rounded-xl p-6 border cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+                currentScenario === scenario.id ? 'ring-2 ring-blue-500 shadow-lg' : ''
+              }`}
+              onClick={() => simulateScenario(scenario.id)}
+            >
+              <div className="flex items-start space-x-3 mb-4">
+                <div className={`w-3 h-3 rounded-full ${scenario.color} mt-1 animate-pulse`}></div>
+                <div>
+                  <h3 className="font-bold text-sm text-medical-blue">{scenario.title}</h3>
+                  <p className="text-xs text-muted-foreground mt-1">{scenario.description}</p>
+                </div>
+              </div>
+              
+              <div className="space-y-2 mb-4">
+                {scenario.details.map((detail, index) => (
+                  <p key={index} className="text-xs text-muted-foreground">• {detail}</p>
+                ))}
+              </div>
+              
+              <div className="space-y-3">
+                <div className="flex justify-between text-xs">
+                  <span className="font-medium">Evoluție risc:</span>
+                  <span className="text-muted-foreground">0-72h</span>
+                </div>
+                
+                <div className="flex items-center space-x-2">
+                  {scenario.riskEvolution.map((risk, index) => (
+                    <div key={index} className="flex-1">
+                      <div className={`h-2 rounded-full ${
+                        risk < 30 ? 'bg-green-400' : risk < 60 ? 'bg-yellow-400' : 'bg-red-400'
+                      }`} style={{ width: `${risk}%` }}></div>
+                      <div className="text-xs text-center mt-1">{risk}%</div>
+                      <div className="text-xs text-center text-muted-foreground">{index * 24}h</div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="flex items-center space-x-2 mt-3 p-2 bg-red-50 rounded-lg border-l-4 border-red-400">
+                  <AlertTriangle className="w-4 h-4 text-red-500" />
+                  <span className="text-xs font-medium text-red-700">{scenario.alert}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Layer Details */}
-      <div className="grid grid-cols-5 gap-4 mt-6 text-sm">
-        <div className="text-center">
-          <div className="w-4 h-4 bg-medical-blue rounded-full mx-auto mb-2"></div>
-          <div className="font-semibold">Date clinice multiparametrice</div>
-          <div className="text-muted-foreground text-xs mt-1">7 parametri</div>
-        </div>
-        <div className="text-center">
-          <div className="w-4 h-4 bg-medical-green rounded-full mx-auto mb-2"></div>
-          <div className="font-semibold">Extracție pattern-uri medicale complexe</div>
-          <div className="text-muted-foreground text-xs mt-1">64 neuroni</div>
-        </div>
-        <div className="text-center">
-          <div className="w-4 h-4 bg-medical-orange rounded-full mx-auto mb-2"></div>
-          <div className="font-semibold">Integrare date clinice complexe</div>
-          <div className="text-muted-foreground text-xs mt-1">32 neuroni</div>
-        </div>
-        <div className="text-center">
-          <div className="w-4 h-4 bg-medical-red rounded-full mx-auto mb-2"></div>
-          <div className="font-semibold">Analiză evoluție temporală</div>
-          <div className="text-muted-foreground text-xs mt-1">16 neuroni</div>
-        </div>
-        <div className="text-center">
-          <div className="w-4 h-4 bg-medical-purple rounded-full mx-auto mb-2"></div>
-          <div className="font-semibold">Stratificare risc IAAM</div>
-          <div className="text-muted-foreground text-xs mt-1">3 categorii</div>
-        </div>
+      {/* Footer */}
+      <div className="text-center text-sm text-muted-foreground bg-secondary/30 rounded-lg p-4">
+        Sistem suport decizional | Validare medicală obligatorie | Conform GDPR și ghiduri INSP
       </div>
     </div>
   );
