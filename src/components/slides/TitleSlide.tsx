@@ -8,14 +8,8 @@ const TitleSlide = () => {
         <div className="space-y-4">
           
           <h1 className="text-5xl md:text-6xl font-bold bg-gradient-medical bg-clip-text text-transparent leading-tight">
-            Predicția IAAM
-            <br />
-            cu Inteligență Artificială
+            Cercetări privind dezvoltarea unor modele eficiente de digitalizare a activităților din epidemiologie
           </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Sistem AI avansat pentru predicția în timp real a infecțiilor asociate asistenței medicale
-          </p>
         </div>
 
         {/* Key Features */}
@@ -26,7 +20,7 @@ const TitleSlide = () => {
             </div>
             <h3 className="font-semibold text-lg">Machine Learning</h3>
             <p className="text-muted-foreground text-sm">
-              Algoritmi avansați pentru recunoașterea tiparelor
+              Detecție precoce cu algoritmi avansați
             </p>
           </div>
           

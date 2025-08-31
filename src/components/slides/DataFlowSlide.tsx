@@ -6,7 +6,7 @@ const DataFlowSlide = () => {
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl font-bold bg-gradient-medical bg-clip-text text-transparent mb-4">
-          Pipeline Clinico-Epidemiologic pentru Procesarea Datelor IAAM
+          Flux clinico-epidemiologic pentru analiza datelor IAAM
         </h1>
         <p className="text-xl text-muted-foreground">
           Transformarea documentației medicale în parametri predictivi validați

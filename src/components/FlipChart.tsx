@@ -117,9 +117,7 @@ const FlipChart = () => {
       <footer className="border-t border-border/50 bg-card/50 backdrop-blur-sm">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <div>
-              Proiect Doctoral - Predicția IAAM cu AI
-            </div>
+            <div></div>
             <div className="flex items-center space-x-4">
               <span>Slide {currentSlide + 1} din {slides.length}</span>
               <div className="flex space-x-1">

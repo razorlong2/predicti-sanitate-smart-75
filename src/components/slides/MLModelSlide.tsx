@@ -10,7 +10,7 @@ const MLModelSlide = () => {
           Modelul Machine Learning
         </h1>
         <p className="text-xl text-muted-foreground">
-          Rețea neuronală hibridă pentru predicția precisă a riscului IAAM
+          Sistem ML pentru estimarea riscului de infecții asociate actului medical
         </p>
       </div>
 
