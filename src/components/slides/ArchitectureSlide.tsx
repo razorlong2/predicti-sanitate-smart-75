@@ -9,7 +9,7 @@ const ArchitectureSlide = () => {
           Arhitectura Sistemului Predictiv pentru IAAM
         </h1>
         <p className="text-xl text-muted-foreground">
-          Procesul Clinico-Epidemiologic
+          Fluxul de Analiză Clinică
         </p>
       </div>
 
@@ -81,12 +81,13 @@ const ArchitectureSlide = () => {
                 <Target className="w-8 h-8 text-white" />
               </div>
               <h3 className="font-bold text-lg">Predicție ML</h3>
+              <p className="text-xs text-muted-foreground/80 mb-3 italic">Algoritm care învață din date medicale</p>
               <div className="space-y-2 text-xs text-muted-foreground">
-                <p>• Rețea neuronală cu 3 straturi ascunse (64-32-16 neuroni)</p>
-                <p>• Funcții de activare: ReLU (hidden), Sigmoid (output)</p>
-                <p>• Algoritm de antrenare: Backpropagation cu Adam optimizer</p>
-                <p>• Performanță: Sensibilitate &gt;92%, Specificitate &gt;78%</p>
-                <p>• AUROC: &gt;0.87 (discriminare clinică foarte bună)</p>
+                <p>• Rețea neuronală cu 3 straturi ascunse</p>
+                <p>• Învață din patterns-urile clinice complexe</p>
+                <p>• Procesează 25 de parametri medicali simultan</p>
+                <p>• Performanță: Găsește 92% din infecții reale</p>
+                <p>• Discriminare clinică foarte bună (AUROC &gt;0.87)</p>
               </div>
             </div>
             <div className="hidden md:block absolute -right-3 top-1/2 transform -translate-y-1/2 z-10">
@@ -124,10 +125,15 @@ const ArchitectureSlide = () => {
             <div className="text-sm text-white/80">Protocoale europene</div>
           </div>
           <div>
-            <div className="text-lg font-semibold">Protocoale INSP România</div>
-            <div className="text-sm text-white/80">Specificațiile naționale</div>
+            <div className="text-lg font-semibold">Normele INSP România</div>
+            <div className="text-sm text-white/80">Respectă ghidurile naționale</div>
           </div>
         </div>
+      </div>
+
+      {/* Page Number */}
+      <div className="text-center text-sm text-muted-foreground mt-8">
+        <span className="bg-secondary/20 px-3 py-1 rounded-full">2/4</span>
       </div>
     </div>
   );

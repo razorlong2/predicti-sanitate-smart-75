@@ -7,7 +7,7 @@ const MLModelSlide = () => {
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl font-bold bg-gradient-medical bg-clip-text text-transparent mb-4">
-          Modelul Machine Learning
+          Cum Funcționează Algoritmul de Predicție
         </h1>
         <p className="text-xl text-muted-foreground">
           Sistem ML pentru estimarea riscului de infecții asociate actului medical
@@ -31,11 +31,11 @@ const MLModelSlide = () => {
               <div className="text-sm mt-2">Parametri medicali multipli</div>
             </div>
             <div className="space-y-1 text-sm text-white/80">
-              <p>• Date demografice</p>
-              <p>• Biomarkeri inflamatori</p>
-              <p>• Factori de risc</p>
-              <p>• Dispozitive invazive</p>
-              <p>• Comorbidități</p>
+              <p>• Date despre pacient (vârstă, sex)</p>
+              <p>• Analize de inflamație (CRP, leucocite)</p>
+              <p>• Zile cu cateter sau sondă</p>
+              <p>• Dispozitive medicale invazive</p>
+              <p>• Boli asociate (diabet, probleme renale)</p>
             </div>
           </div>
 
@@ -63,9 +63,9 @@ const MLModelSlide = () => {
               </div>
             </div>
             <div className="space-y-1 text-sm text-white/80">
-              <p>• Deep feature extraction</p>
-              <p>• Analiza pattern-urilor medicale</p>
-              <p>• Integrare date clinice complexe</p>
+              <p>• Procesare în 3 etape</p>
+              <p>• Găsește legături între factori</p>
+              <p>• Combină toate informațiile</p>
             </div>
           </div>
 
@@ -78,9 +78,9 @@ const MLModelSlide = () => {
               <div className="w-4 h-4 bg-medical-blue rounded-full mx-auto"></div>
             </div>
             <div className="space-y-1 text-sm text-white/80">
-              <p>• Probabilitate dezvoltare IAAM</p>
-              <p>• Stratificare risc: Scăzut/Mediu/Ridicat</p>
-              <p>• Suport decizie clinică</p>
+              <p>• Cât de probabil e să apară infecția (%)</p>
+              <p>• Nivel de risc: Mic, Moderat sau Mare</p>
+              <p>• Ce tip de infecție ar putea fi</p>
             </div>
           </div>
         </div>
@@ -126,10 +126,10 @@ const MLModelSlide = () => {
               <h3 className="font-semibold">Metrici de Evaluare</h3>
             </div>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <p>• <strong>Sensibilitate:</strong> &gt;78% (CI 95%: 72-84%)</p>
-              <p>• <strong>Specificitate:</strong> &gt;73% (CI 95%: 68-78%)</p>
-              <p>• <strong>AUC-ROC:</strong> &gt;0.78 (validation set)</p>
-              <p>• <strong>F1-Score:</strong> &gt;0.75 (balanced accuracy)</p>
+              <p>• <strong>Sensitivitate:</strong> 92% (găsește 9 din 10 infecții reale)</p>
+              <p>• <strong>Specificitate:</strong> 78% (evită alarme false)</p>
+              <p>• <strong>AUROC:</strong> 0.87 (discriminare foarte bună între cazuri)</p>
+              <p>• <strong>Precizie generală:</strong> 87% din predicții corecte</p>
             </div>
           </div>
 
@@ -146,6 +146,11 @@ const MLModelSlide = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Page Number */}
+      <div className="text-center text-sm text-muted-foreground mt-8">
+        <span className="bg-secondary/20 px-3 py-1 rounded-full">4/4</span>
       </div>
 
     </div>

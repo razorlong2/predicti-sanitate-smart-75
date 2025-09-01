@@ -51,13 +51,13 @@ const DataFlowSlide = () => {
               <Brain className="w-12 h-12 text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-semibold mb-2">PROCESARE INTELIGENTĂ</h3>
+              <h3 className="text-xl font-semibold mb-2">ANALIZĂ AUTOMATĂ</h3>
               <div className="space-y-2 text-sm text-muted-foreground">
-                <p>• OCR adaptat formularelor medicale românești</p>
-                <p>• Înțelegere terminologie medicală locală și latină</p>
-                <p>• Mapare automată CIM-10 și clasificare ATC</p>
-                <p>• Extracție inteligentă date relevante</p>
-                <p>• Rata succes: &gt;95% pentru documente standard</p>
+                <p>• Citire automată a documentelor medicale românești</p>
+                <p>• Înțelege terminologia medicală locală și latină</p>
+                <p>• Clasificare automată conform CIM-10</p>
+                <p>• Extrage informații relevante pentru diagnostic</p>
+                <p>• Verificare cu precizie peste 95%</p>
               </div>
             </div>
           </div>
@@ -75,14 +75,14 @@ const DataFlowSlide = () => {
               <TrendingUp className="w-12 h-12 text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-semibold mb-2">INGINERIE CARACTERISTICI</h3>
+              <h3 className="text-xl font-semibold mb-2">IDENTIFICARE FACTORI DE RISC</h3>
               <div className="space-y-2 text-sm text-muted-foreground">
-                <p>• Calcul risc nosocomial stratificat</p>
-                <p>• Scoruri prognostice dinamice</p>
-                <p>• Aplicare criterii internaționale CDC/NHSN</p>
-                <p>• Analiză temporală: Evoluție CRP 12→45→120 mg/L</p>
-                <p>• Trend leucocite pe 72 ore, expunere cumulativă dispozitive</p>
-                <p>• Calibrare protocoale naționale INSP</p>
+                <p>• Calculează riscul de infecție pentru fiecare pacient</p>
+                <p>• Scoruri de prognostic pe baza datelor clinice</p>
+                <p>• Respectă ghidurile medicale internaționale</p>
+                <p>• Analiză în timp: Evoluție CRP 12→45→120 mg/L</p>
+                <p>• Urmărește tendința pe 72 ore pentru fiecare parametru</p>
+                <p>• Conformitate cu normele naționale INSP</p>
               </div>
             </div>
           </div>
@@ -114,7 +114,12 @@ const DataFlowSlide = () => {
 
       {/* Footer */}
       <div className="text-center text-sm text-muted-foreground bg-secondary/30 rounded-lg p-4 mt-8">
-        Conform GDPR | Validare medicală obligatorie | Ghiduri INSP | Sistem suport decizional
+        Date protejate conform legii | Necesită confirmare de către medic | Respectă normele naționale
+      </div>
+
+      {/* Page Number */}
+      <div className="text-center text-sm text-muted-foreground mt-4">
+        <span className="bg-secondary/20 px-3 py-1 rounded-full">3/4</span>
       </div>
 
     </div>
