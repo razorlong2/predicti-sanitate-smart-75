@@ -82,7 +82,7 @@ const DataFlowSlide = () => {
                 <p>• Respectă ghidurile medicale internaționale</p>
                 <p>• Analiză în timp: Evoluție CRP 12→45→120 mg/L</p>
                 <p>• Urmărește tendința pe 72 ore pentru fiecare parametru</p>
-                <p>• Conformitate cu normele naționale INSP</p>
+                <p>• Conformitate cu protocoalele de supraveghere INSP și ghidurile CDC/ECDC</p>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ const DataFlowSlide = () => {
 
       {/* Footer */}
       <div className="text-center text-sm text-muted-foreground bg-secondary/30 rounded-lg p-4 mt-8">
-        Date protejate conform legii | Necesită confirmare de către medic | Respectă normele naționale
+        Model în dezvoltare doctorală | Date pilot: 500 cazuri | Validare clinică: Q1 2025
       </div>
 
       {/* Page Number */}

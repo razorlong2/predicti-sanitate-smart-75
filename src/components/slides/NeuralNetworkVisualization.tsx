@@ -315,114 +315,149 @@ const NeuralNetworkVisualization = () => {
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl font-bold bg-gradient-medical bg-clip-text text-transparent mb-4">
-          Arhitectura Rețelei Neuronale
+          Algoritmul de Decizie pentru Predicția IAAM - Fază Pilot
         </h1>
         <p className="text-xl text-muted-foreground">
-          Procesare în timp real a datelor clinice
+          Pipeline simplificat de analiză clinică
         </p>
       </div>
 
-      {/* Neural Network Section */}
+      {/* Pipeline Section */}
       <div className="bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-3xl p-8 border-2 border-blue-100 shadow-xl">
         <div className="flex justify-between items-center mb-8">
-          <div className="text-xl font-bold text-gray-700">Rețea neuronală hibridă</div>
+          <div className="text-xl font-bold text-gray-700">Pipeline de Analiză IAAM</div>
           <button
             onClick={simulateAllScenarios}
             disabled={isAnimating}
-            className="flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-full hover:from-blue-700 hover:to-purple-800 disabled:opacity-50 transition-all duration-300 transform hover:scale-105 shadow-lg animate-pulse"
+            className="flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-full hover:from-blue-700 hover:to-purple-800 disabled:opacity-50 transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             <Play className="w-5 h-5" />
-            <span className="text-sm font-semibold">▶ SIMULEAZĂ DATE</span>
+            <span className="text-sm font-semibold">▶ DEMO - Date Simulate</span>
           </button>
         </div>
 
-        {/* Network Visualization */}
-        <div className="relative w-[80%] mx-auto h-[520px] bg-white/80 rounded-2xl border border-gray-200 overflow-hidden shadow-inner">
-          {/* Connections */}
-          {getConnections().map((conn, index) => (
-            <Connection key={index} {...conn} />
-          ))}
+        {/* Pipeline Visualization */}
+        <div className="relative w-full mx-auto h-[300px] bg-white/80 rounded-2xl border border-gray-200 overflow-hidden shadow-inner">
+          {/* Pipeline Steps */}
+          <div className="flex justify-between items-center h-full px-8">
+            {/* Step 1: Date Pacient */}
+            <div className="flex flex-col items-center space-y-3">
+              <div className={`w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-2xl ${
+                activeNeurons.size > 0 ? 'animate-pulse shadow-xl scale-110' : 'opacity-70'
+              } transition-all duration-500`}>
+                📊
+              </div>
+              <div className="bg-white/95 backdrop-blur-sm text-blue-900 px-3 py-2 rounded-lg font-bold text-sm shadow-lg border border-blue-200">
+                DATE PACIENT
+              </div>
+              <div className="text-xs text-gray-600 text-center max-w-[120px]">
+                Vârstă, analize, dispozitive, zile internare
+              </div>
+            </div>
 
-          {/* Neurons */}
-          {allNeurons.map(neuron => (
-            <Neuron
-              key={neuron.id}
-              id={neuron.id}
-              x={neuron.x}
-              y={neuron.y}
-              isActive={activeNeurons.has(neuron.id)}
-              layer={neuron.layer}
-              index={neuron.index}
-            />
-          ))}
+            {/* Arrow 1 */}
+            <ArrowRight className={`w-8 h-8 text-blue-500 ${activeNeurons.size > 0 ? 'animate-pulse' : ''}`} />
 
-          {/* Layer Labels - ABOVE nodes with enhanced visibility */}
-          <div className="absolute top-4" style={{ left: '60px' }}>
-            <div className="bg-white/95 backdrop-blur-sm text-blue-900 px-4 py-2 rounded-lg font-bold text-sm shadow-lg border border-blue-200">
-              INPUT - Date Clinice (25)
+            {/* Step 2: Procesare */}
+            <div className="flex flex-col items-center space-y-3">
+              <div className={`w-16 h-16 rounded-xl bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-white text-2xl ${
+                activeNeurons.size > 3 ? 'animate-pulse shadow-xl scale-110' : 'opacity-70'
+              } transition-all duration-500`}>
+                ⚙️
+              </div>
+              <div className="bg-white/95 backdrop-blur-sm text-green-900 px-3 py-2 rounded-lg font-bold text-sm shadow-lg border border-green-200">
+                PROCESARE
+              </div>
+              <div className="text-xs text-gray-600 text-center max-w-[120px]">
+                Normalizare valori, validare date
+              </div>
             </div>
-            <div className="text-xs text-gray-600 mt-2 text-center max-w-[140px]">
-              Vârstă, CRP, Leucocite, Cateter...
+
+            {/* Arrow 2 */}
+            <ArrowRight className={`w-8 h-8 text-green-500 ${activeNeurons.size > 3 ? 'animate-pulse' : ''}`} />
+
+            {/* Step 3: Analiză Risc */}
+            <div className="flex flex-col items-center space-y-3">
+              <div className={`w-16 h-16 rounded-xl bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center text-white text-2xl ${
+                activeNeurons.size > 6 ? 'animate-pulse shadow-xl scale-110' : 'opacity-70'
+              } transition-all duration-500`}>
+                🔬
+              </div>
+              <div className="bg-white/95 backdrop-blur-sm text-orange-900 px-3 py-2 rounded-lg font-bold text-sm shadow-lg border border-orange-200">
+                ANALIZĂ RISC
+              </div>
+              <div className="text-xs text-gray-600 text-center max-w-[120px]">
+                Calcul probabilități pentru fiecare tip IAAM
+              </div>
             </div>
-          </div>
-          
-          <div className="absolute top-4" style={{ left: '260px' }}>
-            <div className="bg-white/95 backdrop-blur-sm text-green-900 px-4 py-2 rounded-lg font-bold text-sm shadow-lg border border-green-200">
-              Hidden 1 (64)
+
+            {/* Arrow 3 */}
+            <ArrowRight className={`w-8 h-8 text-orange-500 ${activeNeurons.size > 6 ? 'animate-pulse' : ''}`} />
+
+            {/* Step 4: Decizie */}
+            <div className="flex flex-col items-center space-y-3">
+              <div className={`w-16 h-16 rounded-xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white text-2xl ${
+                activeNeurons.size > 9 ? 'animate-pulse shadow-xl scale-110' : 'opacity-70'
+              } transition-all duration-500`}>
+                ⚖️
+              </div>
+              <div className="bg-white/95 backdrop-blur-sm text-red-900 px-3 py-2 rounded-lg font-bold text-sm shadow-lg border border-red-200">
+                DECIZIE
+              </div>
+              <div className="text-xs text-gray-600 text-center max-w-[120px]">
+                Stratificare risc (Scăzut/Mediu/Înalt)
+              </div>
             </div>
-          </div>
-          
-          <div className="absolute top-4" style={{ left: '460px' }}>
-            <div className="bg-white/95 backdrop-blur-sm text-orange-900 px-4 py-2 rounded-lg font-bold text-sm shadow-lg border border-orange-200">
-              Hidden 2 (32)
-            </div>
-          </div>
-          
-          <div className="absolute top-4" style={{ left: '660px' }}>
-            <div className="bg-white/95 backdrop-blur-sm text-red-900 px-4 py-2 rounded-lg font-bold text-sm shadow-lg border border-red-200">
-              Hidden 3 (16)
-            </div>
-          </div>
-          
-          <div className="absolute top-4" style={{ left: '820px' }}>
-            <div className="bg-white/95 backdrop-blur-sm text-purple-900 px-4 py-2 rounded-lg font-bold text-sm shadow-lg border border-purple-200">
-              OUTPUT - Predicții
+
+            {/* Arrow 4 */}
+            <ArrowRight className={`w-8 h-8 text-red-500 ${activeNeurons.size > 9 ? 'animate-pulse' : ''}`} />
+
+            {/* Step 5: Acțiune */}
+            <div className="flex flex-col items-center space-y-3">
+              <div className={`w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white text-2xl ${
+                activeNeurons.size > 12 ? 'animate-pulse shadow-xl scale-110' : 'opacity-70'
+              } transition-all duration-500`}>
+                💊
+              </div>
+              <div className="bg-white/95 backdrop-blur-sm text-purple-900 px-3 py-2 rounded-lg font-bold text-sm shadow-lg border border-purple-200">
+                ACȚIUNE
+              </div>
+              <div className="text-xs text-gray-600 text-center max-w-[120px]">
+                Recomandări specifice preventive
+              </div>
             </div>
           </div>
 
-          {/* Output Node Labels with enhanced clarity */}
-          <div className="absolute" style={{ left: '970px', top: '110px' }}>
-            <div className="bg-red-100 text-red-800 px-3 py-1 rounded-lg text-xs font-bold shadow-md">
-              Risc Global
+          {/* Risk Legend */}
+          <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-gray-200">
+            <div className="text-xs font-bold text-gray-700 mb-2">Legenda risc:</div>
+            <div className="space-y-1">
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span className="text-xs">Scăzut (&lt;30%)</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <span className="text-xs">Moderat (30-60%)</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                <span className="text-xs">Crescut (&gt;60%)</span>
+              </div>
             </div>
-            <div className="text-xs text-gray-500 text-center mt-1">0-100%</div>
-          </div>
-          
-          <div className="absolute" style={{ left: '970px', top: '170px' }}>
-            <div className="bg-orange-100 text-orange-800 px-3 py-1 rounded-lg text-xs font-bold shadow-md">
-              Tip Infecție
-            </div>
-            <div className="text-xs text-gray-500 text-center mt-1">UTI/VAP/ISO/CLABSI</div>
-          </div>
-          
-          <div className="absolute" style={{ left: '970px', top: '230px' }}>
-            <div className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-lg text-xs font-bold shadow-md">
-              Confidență
-            </div>
-            <div className="text-xs text-gray-500 text-center mt-1">Interval încredere</div>
           </div>
 
-          {/* Processing Info with enhanced animation */}
+          {/* Processing Info */}
           {isAnimating && (
-            <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl border border-blue-200 animate-pulse">
+            <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl border border-blue-200 animate-pulse">
               <div className="flex items-center space-x-3 text-sm">
                 <div className="w-3 h-3 bg-blue-600 rounded-full animate-ping"></div>
-                <span className="font-bold text-gray-800">Procesare...</span>
+                <span className="font-bold text-gray-800">Demo în curs...</span>
                 <ArrowRight className="w-4 h-4 text-blue-600 animate-bounce" />
-                <span className="text-gray-600">Analiză date...</span>
+                <span className="text-gray-600">Analiză simulată...</span>
               </div>
               <div className="mt-2 text-xs text-center">
-                <span className="text-green-600 font-bold">Predicție: Risc CRESCUT (73%)</span>
+                <span className="text-green-600 font-bold">Rezultat demo: Risc CRESCUT (73%)</span>
               </div>
             </div>
           )}
@@ -434,29 +469,29 @@ const NeuralNetworkVisualization = () => {
             <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
               <span className="text-white text-lg">📊</span>
             </div>
-            <h3 className="text-lg font-bold text-gray-800">Performanță Model</h3>
+            <h3 className="text-lg font-bold text-gray-800">Ținte de Performanță (în dezvoltare)</h3>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6 text-sm">
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
-                <span className="font-semibold text-blue-700">• Dataset:</span>
-                <span className="text-gray-700">2.847 pacienți români</span>
+                <span className="font-semibold text-blue-700">• Dataset pilot:</span>
+                <span className="text-gray-700">500+ cazuri în colectare</span>
               </div>
               <div className="flex items-center space-x-2">
-                <span className="font-semibold text-blue-700">• Acuratețe:</span>
-                <span className="text-gray-700">87% pentru detectarea infecțiilor de spital</span>
+                <span className="font-semibold text-blue-700">• AUROC țintă:</span>
+                <span className="text-gray-700">&gt;0.85</span>
               </div>
             </div>
             
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
-                <span className="font-semibold text-green-700">• Sensitivitate:</span>
-                <span className="text-gray-700">92% (găsește 9 din 10 cazuri)</span>
+                <span className="font-semibold text-green-700">• Sensitivitate țintă:</span>
+                <span className="text-gray-700">&gt;90%</span>
               </div>
               <div className="flex items-center space-x-2">
-                <span className="font-semibold text-green-700">• Timp procesare:</span>
-                <span className="text-gray-700">&lt;2 secunde per pacient</span>
+                <span className="font-semibold text-green-700">• Validare planificată:</span>
+                <span className="text-gray-700">Q1 2025</span>
               </div>
             </div>
           </div>
@@ -465,7 +500,10 @@ const NeuralNetworkVisualization = () => {
 
       {/* Clinical Scenarios */}
       <div className="space-y-6">
-        <h2 className="text-3xl font-bold text-center text-gray-800">Simulări Clinice - 6 Scenarii</h2>
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-gray-800">Simulări Clinice - 6 Scenarii</h2>
+          <p className="text-sm text-gray-600 mt-2">(Scenarii simulate pentru demonstrație)</p>
+        </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {scenarios.map((scenario) => (
@@ -493,9 +531,10 @@ const NeuralNetworkVisualization = () => {
               
               {/* Details */}
               <div className="space-y-2 mb-5">
-                {scenario.details.map((detail, index) => (
-                  <p key={index} className="text-xs text-gray-700 leading-relaxed">• {detail}</p>
+                {scenario.details.slice(0, 3).map((detail, index) => (
+                  <p key={index} className="text-sm text-gray-700 leading-relaxed">• {detail}</p>
                 ))}
+                <p className="text-xs text-gray-500 italic">(Exemplu pentru testare)</p>
               </div>
               
               {/* Risk Evolution */}
@@ -508,7 +547,7 @@ const NeuralNetworkVisualization = () => {
                 <div className="grid grid-cols-3 gap-2">
                   {scenario.riskEvolution.map((risk, index) => (
                     <div key={index} className="text-center">
-                      <div className="relative h-3 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="relative h-4 bg-gray-200 rounded-full overflow-hidden">
                         <div 
                           className="h-full transition-all duration-1000"
                           style={{ 
@@ -521,7 +560,7 @@ const NeuralNetworkVisualization = () => {
                           }}
                         />
                       </div>
-                      <div className="text-xs font-bold mt-1">{risk}%</div>
+                      <div className="text-sm font-bold mt-1">{risk}%</div>
                       <div className="text-xs text-gray-500">{index * 24}h</div>
                     </div>
                   ))}
@@ -540,7 +579,7 @@ const NeuralNetworkVisualization = () => {
 
       {/* Footer */}
       <div className="text-center text-sm text-gray-600 bg-gray-50 rounded-xl p-4 border border-gray-200">
-        <div className="font-medium">Validat pe aproape 3.000 de pacienți din spitale românești | Precizie de 87% în detectarea infecțiilor</div>
+        <div className="font-medium">Sistem în fază de dezvoltare doctorală | Date preliminare din studiu pilot | Validare clinică în curs</div>
       </div>
 
       {/* Page Number */}
