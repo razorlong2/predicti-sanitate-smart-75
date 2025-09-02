@@ -32,14 +32,13 @@ const scenarios: ScenarioData[] = [
   },
   {
     id: 2,
-    title: "INFECȚIE URINARĂ COMUNITARĂ",
+    title: "INFECȚIE URINARĂ DIN COMUNITATE",
     subtitle: "Bărbat 62 ani, prezentare la Urgență",
     description: "Infecție urinară nedependentă de îngrijire medicală",
     details: [
-      "Simptome de 3 zile anterior internării",
-      "Fără cateter urinar sau spitalizări recente",
-      "E. coli sensibil, tratament cu antibiotice anterior eșuat",
-      "Diabet zaharat decompensat"
+      "Simptome de acasă",
+      "Fără cateter recent",
+      "E.coli sensibil"
     ],
     riskEvolution: [8, 12, 15],
     alert: "Infecție din comunitate",
@@ -64,14 +63,13 @@ const scenarios: ScenarioData[] = [
   },
   {
     id: 4,
-    title: "ATELECTAZIE POST-LOBECTOMIE",
+    title: "COMPLICAȚIE CHIRURGICALĂ",
     subtitle: "Femeie 58 ani, Chirurgie Toracică",
     description: "Complicație postoperatorie non-infecțioasă",
     details: [
-      "Ziua 3 postoperator, neventilată",
-      "Tuse productivă, Rx atelectazie (nu infiltrat)",
-      "Hemocultură negativă",
-      "Rezolvare cu fizioterapie"
+      "Post-operator, fără ventilație",
+      "Tuse, dar fără infecție",
+      "Rezolvare cu kinetoterapie"
     ],
     riskEvolution: [15, 22, 25],
     alert: "Complicație chirurgicală",
@@ -96,14 +94,13 @@ const scenarios: ScenarioData[] = [
   },
   {
     id: 6,
-    title: "SEPTICEMIE DE CATETER CENTRAL",
+    title: "INFECȚIE SANGUINĂ DE CATETER",
     subtitle: "Femeie 42 ani, Hematologie, neutropenie",
     description: "Infecție fungică de cateter în context de neutropenie severă",
     details: [
-      "CVC jugular de 19 zile pentru chimioterapie",
-      "Febră 39.2°C, frison, neutropenie <500",
-      "Candida parapsilosis în hemocultură",
-      "Diferențial timp pozitivare >2 ore"
+      "CVC de 19 zile pentru chimioterapie",
+      "Febră mare, frison",
+      "Candidă în sânge"
     ],
     riskEvolution: [56, 74, 89],
     alert: "Infecție fungică de cateter",
@@ -127,9 +124,7 @@ const Neuron = ({ x, y, isActive, layer, label, index }: NeuronProps) => {
   const getColor = () => {
     switch (layer) {
       case 'input': return isActive ? 'bg-gradient-to-br from-blue-500 to-blue-700' : 'bg-gray-300';
-      case 'hidden1': return isActive ? 'bg-gradient-to-br from-green-500 to-green-700' : 'bg-gray-300';
-      case 'hidden2': return isActive ? 'bg-gradient-to-br from-yellow-500 to-orange-600' : 'bg-gray-300';
-      case 'hidden3': return isActive ? 'bg-gradient-to-br from-orange-600 to-red-600' : 'bg-gray-300';
+      case 'hidden': return isActive ? 'bg-gradient-to-br from-green-500 to-green-700' : 'bg-gray-300';
       case 'output': return isActive ? 'bg-gradient-to-br from-red-600 to-pink-700' : 'bg-gray-300';
       default: return 'bg-gray-300';
     }
@@ -196,48 +191,36 @@ const NeuralNetworkVisualization = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentScenario, setCurrentScenario] = useState<number | null>(null);
 
-  // Network structure with increased spacing - 80% width, 30% more height, 20% more spacing
+  // Simplified network structure: 5 → 3 → 3
   const layers = {
-    input: Array.from({ length: 25 }, (_, i) => ({
+    input: Array.from({ length: 5 }, (_, i) => ({
       id: `input-${i}`,
-      x: 100,
-      y: 40 + i * 22, // Increased spacing
+      x: 150,
+      y: 100 + i * 80, // Large spacing for clarity
       layer: 'input',
-      index: i
+      index: i,
+      label: ['Date pacient', 'Analize laborator', 'Dispozitive medicale', 'Istoric medical', 'Durata internării'][i]
     })),
-    hidden1: Array.from({ length: 64 }, (_, i) => ({
-      id: `hidden1-${i}`,
-      x: 300,
-      y: 20 + i * 8.5, // Packed tighter due to many nodes
-      layer: 'hidden1',
-      index: i
-    })),
-    hidden2: Array.from({ length: 32 }, (_, i) => ({
-      id: `hidden2-${i}`,
-      x: 500,
-      y: 50 + i * 17,
-      layer: 'hidden2',
-      index: i
-    })),
-    hidden3: Array.from({ length: 16 }, (_, i) => ({
-      id: `hidden3-${i}`,
-      x: 700,
-      y: 100 + i * 34,
-      layer: 'hidden3',
-      index: i
+    hidden: Array.from({ length: 3 }, (_, i) => ({
+      id: `hidden-${i}`,
+      x: 450,
+      y: 150 + i * 100,
+      layer: 'hidden',
+      index: i,
+      label: ['Analiză primară', 'Identificare pattern', 'Sinteză finală'][i]
     })),
     output: Array.from({ length: 3 }, (_, i) => ({
       id: `output-${i}`,
-      x: 900,
-      y: 200 + i * 80, // More spacing for clear labels
+      x: 750,
+      y: 150 + i * 100,
       layer: 'output',
       index: i,
-      label: i === 0 ? 'Risc Global' : i === 1 ? 'Tip Infecție' : 'Confidență',
-      subtitle: i === 0 ? '0-100%' : i === 1 ? 'UTI/VAP/ISO/CLABSI' : 'Interval încredere'
+      label: ['Risc IAAM', 'Tip probabil infecție', 'Recomandare urgență'][i],
+      subtitle: ['Scăzut/Mediu/Înalt', 'UTI/VAP/ISO/CLABSI', 'Monitorizare recomandată'][i]
     }))
   };
 
-  const allNeurons = [...layers.input, ...layers.hidden1, ...layers.hidden2, ...layers.hidden3, ...layers.output];
+  const allNeurons = [...layers.input, ...layers.hidden, ...layers.output];
 
   const simulateScenario = (scenarioId: number) => {
     setIsAnimating(true);
@@ -247,13 +230,11 @@ const NeuralNetworkVisualization = () => {
     const scenario = scenarios[scenarioId - 1];
     const riskLevel = scenario.riskEvolution[2]; // Final risk level
 
-    // Progressive activation
+    // Progressive activation for simplified network
     const activationSequence = [
-      { delay: 0, neurons: layers.input.slice(0, 4).map(n => n.id) },
-      { delay: 400, neurons: layers.hidden1.slice(0, 6).map(n => n.id) },
-      { delay: 800, neurons: layers.hidden2.slice(0, 4).map(n => n.id) },
-      { delay: 1200, neurons: layers.hidden3.slice(0, 3).map(n => n.id) },
-      { delay: 1600, neurons: [layers.output[Math.floor(riskLevel / 35)].id] }
+      { delay: 0, neurons: layers.input.map(n => n.id) },
+      { delay: 600, neurons: layers.hidden.map(n => n.id) },
+      { delay: 1200, neurons: [layers.output[Math.floor(riskLevel / 35)].id] }
     ];
 
     activationSequence.forEach(step => {
@@ -278,24 +259,20 @@ const NeuralNetworkVisualization = () => {
     const connections: Array<{ x1: number; y1: number; x2: number; y2: number; isActive: boolean }> = [];
     
     const layerPairs = [
-      { from: layers.input, to: layers.hidden1 },
-      { from: layers.hidden1, to: layers.hidden2 },
-      { from: layers.hidden2, to: layers.hidden3 },
-      { from: layers.hidden3, to: layers.output }
+      { from: layers.input, to: layers.hidden },
+      { from: layers.hidden, to: layers.output }
     ];
 
     layerPairs.forEach(({ from, to }) => {
-      from.forEach((fromNeuron, fromIndex) => {
-        to.forEach((toNeuron, toIndex) => {
-          if ((fromIndex + toIndex) % 2 === 0 || Math.abs(fromIndex - toIndex) <= 1) {
-            connections.push({
-              x1: fromNeuron.x,
-              y1: fromNeuron.y,
-              x2: toNeuron.x,
-              y2: toNeuron.y,
-              isActive: activeNeurons.has(fromNeuron.id) && activeNeurons.has(toNeuron.id)
-            });
-          }
+      from.forEach((fromNeuron) => {
+        to.forEach((toNeuron) => {
+          connections.push({
+            x1: fromNeuron.x,
+            y1: fromNeuron.y,
+            x2: toNeuron.x,
+            y2: toNeuron.y,
+            isActive: activeNeurons.has(fromNeuron.id) && activeNeurons.has(toNeuron.id)
+          });
         });
       });
     });
@@ -328,39 +305,33 @@ const NeuralNetworkVisualization = () => {
       {/* Neural Network Section */}
       <div className="bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-3xl p-8 border-2 border-blue-100 shadow-xl">
         <div className="flex justify-between items-center mb-8">
-          <div className="text-xl font-bold text-gray-700">Rețea Neuronală Hibridă</div>
+          <div className="text-xl font-bold text-gray-700">Algoritmul de Decizie pentru Predicția IAAM</div>
           <button
             onClick={simulateAllScenarios}
             disabled={isAnimating}
             className="flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-full hover:from-blue-700 hover:to-purple-800 disabled:opacity-50 transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             <Play className="w-5 h-5" />
-            <span className="text-sm font-semibold">▶ SIMULEAZĂ DATE</span>
+            <span className="text-sm font-semibold">DEMO - Date Simulate</span>
           </button>
         </div>
 
-        {/* Neural Network Visualization - 80% width, 30% more height */}
-        <div className="relative w-[80%] mx-auto h-[600px] bg-white/80 rounded-2xl border border-gray-200 overflow-hidden shadow-inner">
-          {/* Layer Labels - ABOVE nodes */}
-          <div className="absolute top-4 left-[80px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-blue-200">
-            <div className="text-sm font-bold text-blue-900">Date Clinice (25 parametri)</div>
-            <div className="text-xs text-gray-600 mt-1">Vârstă, CRP, Leucocite...</div>
+        {/* Neural Network Visualization - Simplified structure */}
+        <div className="relative w-[90%] mx-auto h-[500px] bg-white/80 rounded-2xl border border-gray-200 overflow-hidden shadow-inner">
+          {/* Layer Labels - ABOVE nodes, simplified structure */}
+          <div className="absolute top-4 left-[120px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-blue-200">
+            <div className="text-sm font-bold text-blue-900">Date Clinice (5 categorii)</div>
+            <div className="text-xs text-gray-600 mt-1">Pacient, Analize, Dispozitive...</div>
           </div>
           
-          <div className="absolute top-4 left-[260px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-green-200">
-            <div className="text-sm font-bold text-green-900">Procesare (64)</div>
+          <div className="absolute top-4 left-[410px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-green-200">
+            <div className="text-sm font-bold text-green-900">Procesare (3 etape)</div>
+            <div className="text-xs text-gray-600 mt-1">Analiză→Pattern→Sinteză</div>
           </div>
           
-          <div className="absolute top-4 left-[460px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-yellow-200">
-            <div className="text-sm font-bold text-orange-900">Analiză (32)</div>
-          </div>
-          
-          <div className="absolute top-4 left-[660px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-orange-200">
-            <div className="text-sm font-bold text-orange-900">Decizie (16)</div>
-          </div>
-          
-          <div className="absolute top-4 left-[840px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-red-200">
+          <div className="absolute top-4 left-[710px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-red-200">
             <div className="text-sm font-bold text-red-900">Predicții IAAM</div>
+            <div className="text-xs text-gray-600 mt-1">Risc, Tip, Urgență</div>
           </div>
 
           {/* Connections */}
@@ -391,30 +362,29 @@ const NeuralNetworkVisualization = () => {
           ))}
 
           {/* Output Node Labels - Clear and prominent */}
-          <div className="absolute right-4 top-[180px] space-y-[60px]">
+          <div className="absolute right-4 top-[130px] space-y-[80px]">
             <div className="bg-red-100/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-red-300">
-              <div className="text-sm font-bold text-red-900">Risc Global</div>
-              <div className="text-xs text-red-700">0-100%</div>
+              <div className="text-sm font-bold text-red-900">Risc IAAM</div>
+              <div className="text-xs text-red-700">Scăzut/Mediu/Înalt</div>
             </div>
             <div className="bg-orange-100/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-orange-300">
-              <div className="text-sm font-bold text-orange-900">Tip Infecție</div>
+              <div className="text-sm font-bold text-orange-900">Tip probabil infecție</div>
               <div className="text-xs text-orange-700">UTI/VAP/ISO/CLABSI</div>
             </div>
             <div className="bg-yellow-100/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-yellow-300">
-              <div className="text-sm font-bold text-yellow-900">Confidență</div>
-              <div className="text-xs text-yellow-700">Interval încredere</div>
+              <div className="text-sm font-bold text-yellow-900">Recomandare urgență</div>
+              <div className="text-xs text-yellow-700">Monitorizare recomandată</div>
             </div>
           </div>
 
-          {/* Input Details */}
+          {/* Input Details - Updated for simplified structure */}
           <div className="absolute left-4 top-[100px] bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-200 text-xs max-w-[200px]">
             <div className="space-y-1">
-              <div><strong>Node 1-3:</strong> DATE PACIENT</div>
-              <div><strong>Node 4-6:</strong> TIMING</div>
-              <div><strong>Node 7-10:</strong> DISPOZITIVE</div>
-              <div><strong>Node 11-16:</strong> BIOMARKERI</div>
-              <div><strong>Node 17-21:</strong> COMORBIDITĂȚI</div>
-              <div><strong>Node 22-25:</strong> CONTEXT</div>
+              <div><strong>Node 1:</strong> DATE PACIENT</div>
+              <div><strong>Node 2:</strong> ANALIZE LABORATOR</div>
+              <div><strong>Node 3:</strong> DISPOZITIVE MEDICALE</div>
+              <div><strong>Node 4:</strong> ISTORIC MEDICAL</div>
+              <div><strong>Node 5:</strong> DURATA INTERNĂRII</div>
             </div>
           </div>
 
@@ -463,23 +433,23 @@ const NeuralNetworkVisualization = () => {
           <div className="grid md:grid-cols-2 gap-6 text-sm">
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
-                <span className="font-semibold text-blue-700">• Dataset:</span>
-                <span className="text-gray-700">2.847 pacienți români</span>
+                <span className="font-semibold text-blue-700">• Dataset pilot:</span>
+                <span className="text-gray-700">&gt;500 pacienți în colectare</span>
               </div>
               <div className="flex items-center space-x-2">
-                <span className="font-semibold text-blue-700">• Acuratețe:</span>
-                <span className="text-gray-700">87% pentru detectarea infecțiilor de spital</span>
+                <span className="font-semibold text-blue-700">• Țintă acuratețe:</span>
+                <span className="text-gray-700">&gt;85%</span>
               </div>
             </div>
             
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
-                <span className="font-semibold text-green-700">• Sensitivitate:</span>
-                <span className="text-gray-700">92% (detectează 9 din 10 cazuri)</span>
+                <span className="font-semibold text-green-700">• Țintă sensitivitate:</span>
+                <span className="text-gray-700">&gt;90%</span>
               </div>
               <div className="flex items-center space-x-2">
-                <span className="font-semibold text-green-700">• Timp procesare:</span>
-                <span className="text-gray-700">&lt;2 secunde per pacient</span>
+                <span className="font-semibold text-green-700">• Procesare rapidă:</span>
+                <span className="text-gray-700">câteva secunde</span>
               </div>
             </div>
           </div>
@@ -567,7 +537,7 @@ const NeuralNetworkVisualization = () => {
 
       {/* Footer */}
       <div className="text-center text-sm text-gray-600 bg-gray-50 rounded-xl p-4 border border-gray-200">
-        <div className="font-medium">Validat pe aproape 3.000 de pacienți din spitale românești | Precizie de 87% în detectarea infecțiilor</div>
+        <div className="font-medium">Model în dezvoltare | Studiu pilot în desfășurare | Validare clinică planificată 2025</div>
       </div>
 
       {/* Page Number */}
