@@ -16,94 +16,93 @@ interface ScenarioData {
 const scenarios: ScenarioData[] = [
   {
     id: 1,
-    title: "INFECȚIE URINARĂ DE CATETER",
-    subtitle: "Femeie 71 ani, Neurologie, Spital Județean",
-    description: "Pacientă cu AVC, cateter urinar prelungit",
+    title: "INFECȚIE URINARĂ - CATETER VEZICAL",
+    subtitle: "Femeie 71 ani, Neurologie, Spital Județean Cluj",
+    description: "Pacientă cu AVC ischemic, cateter vezical prelungit",
     details: [
-      "Cateter urinar de 5 zile post-AVC",
-      "Febră 38.4°C, urină tulbure nou apărute",
-      "Klebsiella ESBL+ >10⁵ UFC/ml",
-      "CRP 67 mg/L, Leucocite 13.200"
+      "Cateter vezical de 6 zile post-AVC",
+      "Febră 38.2°C, urină tulbure odoare modificată",
+      "Klebsiella pneumoniae ESBL pozitiv",
+      "CRP 78 mg/L (normal <5), leucocite 14.800"
     ],
-    riskEvolution: [25, 48, 72],
-    alert: "Risc crescut infecție cateter",
+    riskEvolution: [28, 52, 74],
+    alert: "Infecție urinară asociată cateterului",
     color: "bg-red-500",
     riskLevel: 'high'
   },
   {
     id: 2,
-    title: "INFECȚIE URINARĂ DIN COMUNITATE",
-    subtitle: "Bărbat 62 ani, prezentare la Urgență",
-    description: "Infecție urinară nedependentă de îngrijire medicală",
+    title: "INFECȚIE URINARĂ COMUNITARĂ",
+    subtitle: "Bărbat 58 ani, prezentsat în Urgență",
+    description: "Cistită acută la pacient diabetic, fără cateter",
     details: [
-      "Simptome de acasă",
-      "Fără cateter recent",
-      "E.coli sensibil"
+      "Dureri la urinare de 2 zile",
+      "Febră subfebrilă 37.8°C",
+      "E.coli în urocultură, sensibil la amoxiclav"
     ],
-    riskEvolution: [8, 12, 15],
-    alert: "Infecție din comunitate",
+    riskEvolution: [12, 18, 22],
+    alert: "Infecție urinară dobândită în comunitate",
     color: "bg-green-500",
     riskLevel: 'low'
   },
   {
     id: 3,
-    title: "PNEUMONIE DE VENTILATOR",
-    subtitle: "Bărbat 48 ani, ATI, traumatism cranio-cerebral",
-    description: "Pneumonie asociată ventilației la pacient ventilat mecanic",
+    title: "PNEUMONIE LA PACIENT INTUBAT",
+    subtitle: "Bărbat 52 ani, ATI, traumatism cranian sever",
+    description: "Pneumonie asociată ventilației mecanice",
     details: [
-      "Ventilație mecanică ziua 4",
-      "Secreții purulente noi, Rx infiltrat bazal",
-      "Pseudomonas aeruginosa 10⁶ CFU/ml",
-      "CPIS score: 8 puncte"
+      "Ventilație mecanică de 5 zile",
+      "Secreții bronșice purulente, Rx: infiltrat bilobbar",
+      "Pseudomonas aeruginosa în aspiratul bronșic",
+      "CPIS score: 9 puncte, PCT 4.2 ng/ml"
     ],
-    riskEvolution: [35, 58, 78],
-    alert: "Pneumonie asociată ventilației",
+    riskEvolution: [42, 63, 81],
+    alert: "Pneumonie asociată ventilației mecanice",
     color: "bg-red-500",
     riskLevel: 'high'
   },
   {
     id: 4,
-    title: "COMPLICAȚIE CHIRURGICALĂ",
-    subtitle: "Femeie 58 ani, Chirurgie Toracică",
-    description: "Complicație postoperatorie non-infecțioasă",
+    title: "COMPLICAȚIE DUPĂ OPERAȚIE PULMONARĂ",
+    subtitle: "Femeie 62 ani, Chirurgie Toracică",
+    description: "Atelectazie postoperatorie, fără infecție",
     details: [
-      "Post-operator, fără ventilație",
-      "Tuse, dar fără infecție",
-      "Rezolvare cu kinetoterapie"
+      "Ziua 3 post-lobectomie inferioară",
+      "Tuse neproductivă, febră ușoară",
+      "Rx: atelectazie bazală dreaptă"
     ],
-    riskEvolution: [15, 22, 25],
-    alert: "Complicație chirurgicală",
+    riskEvolution: [18, 25, 28],
+    alert: "Monitorizare complicații postoperatorii",
     color: "bg-yellow-500",
     riskLevel: 'moderate'
   },
   {
     id: 5,
-    title: "INFECȚIE PLAGĂ OPERATORIE",
-    subtitle: "Bărbat 55 ani, post-colecistectomie",
-    description: "Infecție profundă cu necesitate de reintervenție",
+    title: "INFECȚIE ÎN PLAGĂ",
+    subtitle: "Bărbat 49 ani, post-colecistectomie laparoscopică",
+    description: "Infecție superficială în cicatricea operatorie",
     details: [
-      "Ziua 7 postoperator, plagă purulentă",
-      "Dehiscență parțială, eritem periincizional",
-      "Staphylococcus aureus MRSA",
-      "CRP 145 mg/L, necesită reintervenție"
+      "Ziua 8 postoperator, plagă cu secreții",
+      "Eritem periincizional 3x4 cm, durere locală",
+      "Staphylococcus aureus MSSA în exudatul de plagă"
     ],
-    riskEvolution: [42, 67, 81],
-    alert: "Infecție profundă confirmată",
+    riskEvolution: [35, 58, 72],
+    alert: "Infecție de plagă operatorie confirmată",
     color: "bg-red-600",
     riskLevel: 'critical'
   },
   {
     id: 6,
-    title: "INFECȚIE SANGUINĂ DE CATETER",
-    subtitle: "Femeie 42 ani, Hematologie, neutropenie",
-    description: "Infecție fungică de cateter în context de neutropenie severă",
+    title: "INFECȚIE ÎN SÂNGE - CATETER VENOS",
+    subtitle: "Femeie 38 ani, Oncologie, leucemie acută",
+    description: "Fungicemie pe cateter central în chimioterapie",
     details: [
-      "CVC de 19 zile pentru chimioterapie",
-      "Febră mare, frison",
-      "Candidă în sânge"
+      "Port-a-cath de 15 zile pentru chimioterapie",
+      "Febră înaltă 39.5°C cu frisoane",
+      "Candida albicans în hemocultură centrală și periferică"
     ],
-    riskEvolution: [56, 74, 89],
-    alert: "Infecție fungică de cateter",
+    riskEvolution: [48, 72, 86],
+    alert: "Candidemie asociată cateterului central",
     color: "bg-red-800",
     riskLevel: 'critical'
   }
@@ -537,7 +536,7 @@ const NeuralNetworkVisualization = () => {
 
       {/* Footer */}
       <div className="text-center text-sm text-gray-600 bg-gray-50 rounded-xl p-4 border border-gray-200">
-        <div className="font-medium">Model în dezvoltare | Studiu pilot în desfășurare | Validare clinică planificată 2025</div>
+        <div className="font-medium">Sistem în fază de cercetare | Date simulate pentru demonstrație</div>
       </div>
 
       {/* Page Number */}

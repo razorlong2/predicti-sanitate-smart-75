@@ -9,7 +9,7 @@ const ArchitectureSlide = () => {
           Arhitectura Sistemului Predictiv pentru IAAM
         </h1>
         <p className="text-xl text-muted-foreground">
-          Fluxul de Analiză Clinică
+          Etapele analizei
         </p>
       </div>
 
@@ -80,8 +80,8 @@ const ArchitectureSlide = () => {
               <div className="w-16 h-16 bg-medical-red rounded-2xl flex items-center justify-center mx-auto shadow-lg">
                 <Target className="w-8 h-8 text-white" />
               </div>
-              <h3 className="font-bold text-lg">Predicție ML</h3>
-              <p className="text-xs text-muted-foreground/80 mb-3 italic">Algoritm care învață din date medicale</p>
+              <h3 className="font-bold text-lg">Calculare risc</h3>
+              <p className="text-xs text-muted-foreground/80 mb-3 italic">Analiză automată din date medicale</p>
               <div className="space-y-2 text-xs text-muted-foreground">
                 <p>• Rețea neuronală cu 3 straturi ascunse</p>
                 <p>• Învață din patterns-urile clinice complexe</p>
@@ -101,7 +101,7 @@ const ArchitectureSlide = () => {
               <div className="w-16 h-16 bg-medical-blue rounded-2xl flex items-center justify-center mx-auto shadow-lg">
                 <Activity className="w-8 h-8 text-white" />
               </div>
-              <h3 className="font-bold text-lg">Output</h3>
+              <h3 className="font-bold text-lg">Rezultate</h3>
               <div className="space-y-2 text-xs text-muted-foreground">
                 <p>• Risc IAAM (%)</p>
                 <p>• Tipuri probabile IAAM</p>

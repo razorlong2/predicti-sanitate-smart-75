@@ -14,27 +14,27 @@ const TitleSlide = () => {
 
         {/* Key Features */}
         <div className="grid md:grid-cols-3 gap-6 mt-12">
-          <div className="medical-card rounded-2xl p-6 text-center space-y-3">
+          <div className="medical-card rounded-2xl p-6 text-center space-y-3 animate-fade-in tilt-3d">
             <div className="w-12 h-12 bg-medical-blue rounded-xl flex items-center justify-center mx-auto">
               <Brain className="w-6 h-6 text-white" />
             </div>
             <h3 className="font-semibold text-lg">Machine Learning</h3>
             <p className="text-muted-foreground text-sm">
-              Detecție precoce cu algoritmi avansați
+              Detecție precoce cu analiză automată
             </p>
           </div>
           
-          <div className="medical-card rounded-2xl p-6 text-center space-y-3">
+          <div className="medical-card rounded-2xl p-6 text-center space-y-3 animate-fade-in tilt-3d" style={{animationDelay: '0.2s'}}>
             <div className="w-12 h-12 bg-medical-green rounded-xl flex items-center justify-center mx-auto">
               <Shield className="w-6 h-6 text-white" />
             </div>
             <h3 className="font-semibold text-lg">Prevenție Activă</h3>
             <p className="text-muted-foreground text-sm">
-              Măsuri preventive personalizate în timp real
+              Alertează medicul când e necesar
             </p>
           </div>
           
-          <div className="medical-card rounded-2xl p-6 text-center space-y-3">
+          <div className="medical-card rounded-2xl p-6 text-center space-y-3 animate-fade-in tilt-3d" style={{animationDelay: '0.4s'}}>
             <div className="w-12 h-12 bg-medical-orange rounded-xl flex items-center justify-center mx-auto">
               <Target className="w-6 h-6 text-white" />
             </div>
@@ -49,7 +49,7 @@ const TitleSlide = () => {
         <div className="pt-8 border-t border-border/50">
           <p className="text-lg text-muted-foreground">
             <strong className="text-medical-blue">Obiectiv:</strong> Reducerea incidenței IAAM prin {' '}
-            <strong className="text-medical-orange">detecție precoce</strong> și <strong className="text-medical-blue">intervenție preventivă personalizată</strong>
+            <strong className="text-medical-orange">detecție precoce</strong> și <strong className="text-medical-blue">intervenție preventivă</strong>
           </p>
         </div>
       </div>
