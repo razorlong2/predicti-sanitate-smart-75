@@ -1,24 +1,18 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, FileText, AlertTriangle, TestTube, Brain, HelpCircle, BarChart3, Target, Heart } from "lucide-react";
-import DoctoralTitleSlide from "./slides/DoctoralTitleSlide";
-import ProblemSlide from "./slides/ProblemSlide";
-import MethodologySlide from "./slides/MethodologySlide";
-import SimpleModelSlide from "./slides/SimpleModelSlide";
-import CasesSlide from "./slides/CasesSlide";
-import PneumoniaCasesSlide from "./slides/PneumoniaCasesSlide";
-import MeasurementsSlide from "./slides/MeasurementsSlide";
-import ImpactSlide from "./slides/ImpactSlide";
+import { ChevronLeft, ChevronRight, FileText, Brain, Database, Activity, Target, GitBranch, Shield, TrendingUp, AlertTriangle, Award } from "lucide-react";
+import TitleSlide from "./slides/TitleSlide";
+import ArchitectureSlide from "./slides/ArchitectureSlide";
+import DataFlowSlide from "./slides/DataFlowSlide";
+import MLModelSlide from "./slides/MLModelSlide";
+import NeuralNetworkVisualization from "./slides/NeuralNetworkVisualization";
 
 const slides = [
-  { id: 0, title: "Titlu", icon: FileText, component: DoctoralTitleSlide },
-  { id: 1, title: "Problema", icon: AlertTriangle, component: ProblemSlide },
-  { id: 2, title: "Metodologia", icon: TestTube, component: MethodologySlide },
-  { id: 3, title: "Modelul", icon: Brain, component: SimpleModelSlide },
-  { id: 4, title: "Cazuri Urinare/Plagă", icon: HelpCircle, component: CasesSlide },
-  { id: 5, title: "Cazuri Pneumonie", icon: HelpCircle, component: PneumoniaCasesSlide },
-  { id: 6, title: "Măsurători", icon: BarChart3, component: MeasurementsSlide },
-  { id: 7, title: "Impact", icon: Heart, component: ImpactSlide }
+  { id: 0, title: "Titlu", icon: FileText, component: TitleSlide },
+  { id: 1, title: "Arhitectura Sistemului", icon: Database, component: ArchitectureSlide },
+  { id: 2, title: "Fluxul de Date", icon: Activity, component: DataFlowSlide },
+  { id: 3, title: "Modelul ML", icon: Brain, component: MLModelSlide },
+  { id: 4, title: "Arhitectura Detaliată", icon: TrendingUp, component: () => <NeuralNetworkVisualization /> }
 ];
 
 const FlipChart = () => {
