@@ -3,16 +3,18 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, FileText, Brain, Database, Activity, Target, GitBranch, Shield, TrendingUp, AlertTriangle, Award } from "lucide-react";
 import TitleSlide from "./slides/TitleSlide";
 import ArchitectureSlide from "./slides/ArchitectureSlide";
+import MeasurementSlide from "./slides/MeasurementSlide";
 import DataFlowSlide from "./slides/DataFlowSlide";
 import MLModelSlide from "./slides/MLModelSlide";
-import NeuralNetworkVisualization from "./slides/NeuralNetworkVisualization";
+import ClinicalCasesSlide from "./slides/ClinicalCasesSlide";
 
 const slides = [
   { id: 0, title: "Titlu", icon: FileText, component: TitleSlide },
   { id: 1, title: "Arhitectura Sistemului", icon: Database, component: ArchitectureSlide },
-  { id: 2, title: "Fluxul de Date", icon: Activity, component: DataFlowSlide },
-  { id: 3, title: "Modelul ML", icon: Brain, component: MLModelSlide },
-  { id: 4, title: "Arhitectura Detaliată", icon: TrendingUp, component: () => <NeuralNetworkVisualization /> }
+  { id: 2, title: "Stabilirea Predicției", icon: Target, component: MeasurementSlide },
+  { id: 3, title: "Fluxul de Date", icon: Activity, component: DataFlowSlide },
+  { id: 4, title: "Modelul ML", icon: Brain, component: MLModelSlide },
+  { id: 5, title: "Cazuri Clinice", icon: AlertTriangle, component: ClinicalCasesSlide }
 ];
 
 const FlipChart = () => {
