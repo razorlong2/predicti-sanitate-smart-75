@@ -5,6 +5,7 @@ import TitleSlide from "./slides/TitleSlide";
 import ArchitectureSlide from "./slides/ArchitectureSlide";
 import DataFlowSlide from "./slides/DataFlowSlide";
 import MLModelSlide from "./slides/MLModelSlide";
+import MeasurementSlide from "./slides/MeasurementSlide";
 import NeuralNetworkVisualization from "./slides/NeuralNetworkVisualization";
 
 const slides = [
@@ -12,7 +13,8 @@ const slides = [
   { id: 1, title: "Arhitectura Sistemului", icon: Database, component: ArchitectureSlide },
   { id: 2, title: "Fluxul de Date", icon: Activity, component: DataFlowSlide },
   { id: 3, title: "Modelul ML", icon: Brain, component: MLModelSlide },
-  { id: 4, title: "Arhitectura Detaliată", icon: TrendingUp, component: () => <NeuralNetworkVisualization /> }
+  { id: 4, title: "Stabilirea Predicției", icon: Target, component: MeasurementSlide },
+  { id: 5, title: "Arhitectura Detaliată", icon: TrendingUp, component: () => <NeuralNetworkVisualization /> }
 ];
 
 const FlipChart = () => {

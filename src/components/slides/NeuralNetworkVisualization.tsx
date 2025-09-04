@@ -131,18 +131,27 @@ const Neuron = ({ x, y, isActive, layer, label, index }: NeuronProps) => {
 
   return (
     <div
-      className={`absolute w-8 h-8 rounded-full ${getColor()} transition-all duration-700 flex items-center justify-center text-white text-xs font-bold shadow-lg border-2 border-white ${
-        isActive ? 'animate-pulse shadow-xl scale-125 z-10' : 'scale-100'
+      className={`absolute w-10 h-10 rounded-full ${getColor()} transition-all duration-700 flex items-center justify-center text-white text-xs font-bold shadow-lg border-3 border-white hover-scale glow-pulse ${
+        isActive ? 'animate-breathe shadow-2xl scale-150 z-20 animate-float' : 'scale-100 hover:scale-110'
       }`}
       style={{ 
-        left: x - 16, 
-        top: y - 16,
+        left: x - 20, 
+        top: y - 20,
+        transformStyle: 'preserve-3d'
       }}
     >
       {index !== undefined && (
-        <span className={`text-xs ${isActive ? 'text-white' : 'text-gray-600'}`}>
+        <span className={`text-xs font-extrabold ${isActive ? 'text-white animate-pulse' : 'text-gray-600'}`}>
           {index + 1}
         </span>
+      )}
+      
+      {/* Animated ring effect for active neurons */}
+      {isActive && (
+        <>
+          <div className="absolute inset-0 rounded-full border-2 border-white animate-ping opacity-75"></div>
+          <div className="absolute inset-0 rounded-full bg-white/20 animate-pulse"></div>
+        </>
       )}
     </div>
   );
@@ -159,27 +168,55 @@ const Connection = ({ x1, y1, x2, y2, isActive }: { x1: number; y1: number; x2: 
         left: x1,
         top: y1,
         width: length,
-        height: 2,
+        height: 3,
         transform: `rotate(${angle}deg)`,
         transformOrigin: '0 50%',
       }}
     >
       <div 
-        className={`w-full h-full transition-all duration-500 ${
+        className={`w-full h-full transition-all duration-1000 rounded-full ${
           isActive 
-            ? 'bg-gradient-to-r from-blue-500 via-green-500 to-orange-500 opacity-90' 
+            ? 'bg-gradient-to-r from-blue-500 via-purple-500 via-green-500 to-orange-500 opacity-90 animate-liquid-fill shadow-lg' 
             : 'bg-gray-300 opacity-30'
         }`}
       />
       {isActive && (
-        <div 
-          className="absolute w-1 h-1 bg-blue-400 rounded-full animate-ping"
-          style={{ 
-            left: '20%', 
-            top: '-2px',
-            animationDelay: '0s'
-          }}
-        />
+        <>
+          {/* Multiple flowing particles */}
+          <div 
+            className="absolute w-1.5 h-1.5 bg-cyan-300 rounded-full animate-ping"
+            style={{ 
+              left: '10%', 
+              top: '-3px',
+              animationDelay: '0s',
+              animationDuration: '0.8s'
+            }}
+          />
+          <div 
+            className="absolute w-1 h-1 bg-yellow-300 rounded-full animate-ping"
+            style={{ 
+              left: '40%', 
+              top: '-2px',
+              animationDelay: '0.2s',
+              animationDuration: '1s'
+            }}
+          />
+          <div 
+            className="absolute w-1.5 h-1.5 bg-pink-300 rounded-full animate-ping"
+            style={{ 
+              left: '70%', 
+              top: '-3px',
+              animationDelay: '0.4s',
+              animationDuration: '1.2s'
+            }}
+          />
+          
+          {/* Flowing gradient overlay */}
+          <div 
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse rounded-full"
+            style={{ animationDuration: '1.5s' }}
+          />
+        </>
       )}
     </div>
   );
@@ -316,7 +353,7 @@ const NeuralNetworkVisualization = () => {
         </div>
 
         {/* Neural Network Visualization - Simplified structure */}
-        <div className="relative w-[90%] mx-auto h-[500px] bg-white/80 rounded-2xl border border-gray-200 overflow-hidden shadow-inner">
+        <div className="relative w-[90%] mx-auto h-[500px] bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 rounded-2xl border border-blue-200 overflow-hidden shadow-2xl backdrop-blur-sm hover-scale tilt-3d">
           {/* Layer Labels - ABOVE nodes, simplified structure */}
           <div className="absolute top-4 left-[120px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-blue-200">
             <div className="text-sm font-bold text-blue-900">Date Clinice (5 categorii)</div>
