@@ -1,4 +1,5 @@
-import { Database, Brain, Target, TrendingUp, Activity, Layers } from "lucide-react";
+import { Brain, Layers, Target, TrendingUp } from "lucide-react";
+import NeuralNetworkVisualization from "./NeuralNetworkVisualization";
 
 const MLModelSlide = () => {
   return (
@@ -13,72 +14,73 @@ const MLModelSlide = () => {
         </p>
       </div>
 
-      {/* Neural Network Architecture */}
-      <div className="bg-gradient-to-br from-card to-card/50 rounded-2xl p-8 border shadow-lg">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold mb-4">Arhitectura Modelului</h2>
-          <p className="text-muted-foreground">
-            Input Layer → Hidden 1 → Hidden 2 → Hidden 3 → Output
-          </p>
-        </div>
-
-        <div className="grid grid-cols-5 gap-4 items-center mb-8">
+      {/* Neural Network Visualization */}
+      <div className="bg-gradient-medical rounded-2xl p-8 text-white">
+        <h2 className="text-2xl font-bold text-center mb-8">Arhitectura Rețelei Neuronale</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           {/* Input Layer */}
-          <div className="text-center">
-            <div className="bg-medical-blue rounded-xl p-4 mb-3">
-              <Database className="w-6 h-6 text-white mx-auto" />
+          <div className="text-center space-y-4">
+            <h3 className="text-xl font-semibold">Input Layer</h3>
+            <div className="space-y-2">
+              <div className="w-4 h-4 bg-white/80 rounded-full mx-auto"></div>
+              <div className="w-4 h-4 bg-white/80 rounded-full mx-auto"></div>
+              <div className="w-4 h-4 bg-white/80 rounded-full mx-auto"></div>
+              <div className="w-4 h-4 bg-white/60 rounded-full mx-auto"></div>
+              <div className="w-4 h-4 bg-white/60 rounded-full mx-auto"></div>
+              <div className="text-sm mt-2">Parametri medicali multipli</div>
             </div>
-            <h4 className="font-semibold text-sm mb-2">Parametri clinici</h4>
-            <div className="text-xs text-muted-foreground space-y-1">
-              <p>• Temperatură</p>
-              <p>• Leucocite</p>
-              <p>• CRP, PCT</p>
-              <p>• Zile cateter</p>
-              <p>• Vârstă, sex</p>
-              <p>• Comorbidități</p>
+            <div className="space-y-1 text-sm text-white/80">
+              <p>• Date despre pacient (vârstă, sex)</p>
+              <p>• Analize de inflamație (CRP, leucocite)</p>
+              <p>• Zile cu cateter sau sondă</p>
+              <p>• Dispozitive medicale invazive</p>
+              <p>• Boli asociate (diabet, probleme renale)</p>
             </div>
           </div>
 
-          {/* Hidden Layer 1 */}
-          <div className="text-center">
-            <div className="bg-medical-green rounded-xl p-4 mb-3">
-              <Brain className="w-6 h-6 text-white mx-auto" />
+          {/* Hidden Layers */}
+          <div className="text-center space-y-4">
+            <h3 className="text-xl font-semibold">Hidden Layers</h3>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="space-y-2">
+                <div className="w-3 h-3 bg-white/80 rounded-full mx-auto"></div>
+                <div className="w-3 h-3 bg-white/80 rounded-full mx-auto"></div>
+                <div className="w-3 h-3 bg-white/80 rounded-full mx-auto"></div>
+                <div className="w-3 h-3 bg-white/80 rounded-full mx-auto"></div>
+              </div>
+              <div className="space-y-2">
+                <div className="w-3 h-3 bg-white/60 rounded-full mx-auto"></div>
+                <div className="w-3 h-3 bg-white/60 rounded-full mx-auto"></div>
+                <div className="w-3 h-3 bg-white/60 rounded-full mx-auto"></div>
+                <div className="w-3 h-3 bg-white/60 rounded-full mx-auto"></div>
+              </div>
+              <div className="space-y-2">
+                <div className="w-3 h-3 bg-white/40 rounded-full mx-auto"></div>
+                <div className="w-3 h-3 bg-white/40 rounded-full mx-auto"></div>
+                <div className="w-3 h-3 bg-white/40 rounded-full mx-auto"></div>
+                <div className="w-3 h-3 bg-white/40 rounded-full mx-auto"></div>
+              </div>
             </div>
-            <h4 className="font-semibold text-sm">Procesare</h4>
-            <h4 className="font-semibold text-sm mb-1">primară</h4>
-            <p className="text-xs text-muted-foreground">32 neuroni</p>
-          </div>
-
-          {/* Hidden Layer 2 */}
-          <div className="text-center">
-            <div className="bg-medical-green rounded-xl p-4 mb-3">
-              <Activity className="w-6 h-6 text-white mx-auto" />
+            <div className="space-y-1 text-sm text-white/80">
+              <p>• Procesare în 3 etape</p>
+              <p>• Găsește legături între factori</p>
+              <p>• Combină toate informațiile</p>
             </div>
-            <h4 className="font-semibold text-sm">Procesare</h4>
-            <h4 className="font-semibold text-sm mb-1">secundară</h4>
-            <p className="text-xs text-muted-foreground">24 neuroni</p>
-          </div>
-
-          {/* Hidden Layer 3 */}
-          <div className="text-center">
-            <div className="bg-medical-orange rounded-xl p-4 mb-3">
-              <TrendingUp className="w-6 h-6 text-white mx-auto" />
-            </div>
-            <h4 className="font-semibold text-sm">Rafinare</h4>
-            <h4 className="font-semibold text-sm mb-1">finală</h4>
-            <p className="text-xs text-muted-foreground">16 neuroni</p>
           </div>
 
           {/* Output Layer */}
-          <div className="text-center">
-            <div className="bg-medical-red rounded-xl p-4 mb-3">
-              <Target className="w-6 h-6 text-white mx-auto" />
+          <div className="text-center space-y-4">
+            <h3 className="text-xl font-semibold">Output Layer</h3>
+            <div className="space-y-2">
+              <div className="w-4 h-4 bg-medical-red rounded-full mx-auto"></div>
+              <div className="w-4 h-4 bg-medical-orange rounded-full mx-auto"></div>
+              <div className="w-4 h-4 bg-medical-blue rounded-full mx-auto"></div>
             </div>
-            <h4 className="font-semibold text-sm mb-2">Clasificare risc IAAM</h4>
-            <div className="text-xs text-muted-foreground space-y-1">
-              <p>• Scăzut</p>
-              <p>• Moderat</p>
-              <p>• Crescut</p>
+            <div className="space-y-1 text-sm text-white/80">
+              <p>• Cât de probabil e să apară infecția (%)</p>
+              <p>• Nivel de risc: Mic, Moderat sau Mare</p>
+              <p>• Ce tip de infecție ar putea fi</p>
             </div>
           </div>
         </div>
@@ -148,7 +150,7 @@ const MLModelSlide = () => {
 
       {/* Page Number */}
       <div className="text-center text-sm text-muted-foreground mt-8">
-        <span className="bg-secondary/20 px-3 py-1 rounded-full">6/6</span>
+        <span className="bg-secondary/20 px-3 py-1 rounded-full">4/4</span>
       </div>
 
     </div>
