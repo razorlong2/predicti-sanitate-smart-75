@@ -6,7 +6,10 @@ import ArchitectureSlide from "./slides/ArchitectureSlide";
 import DataFlowSlide from "./slides/DataFlowSlide";
 import MLModelSlide from "./slides/MLModelSlide";
 import MeasurementSlide from "./slides/MeasurementSlide";
+import ClinicalCasesSlide from "./slides/ClinicalCasesSlide";
+import NetworkIntegrationSlide from "./slides/NetworkIntegrationSlide";
 import NeuralNetworkVisualization from "./slides/NeuralNetworkVisualization";
+import PerformanceSlide from "./slides/PerformanceSlide";
 
 const slides = [
   { id: 0, title: "Titlu", icon: FileText, component: TitleSlide },
@@ -14,7 +17,10 @@ const slides = [
   { id: 2, title: "Fluxul de Date", icon: Activity, component: DataFlowSlide },
   { id: 3, title: "Modelul ML", icon: Brain, component: MLModelSlide },
   { id: 4, title: "Stabilirea Predicției", icon: Target, component: MeasurementSlide },
-  { id: 5, title: "Arhitectura Detaliată", icon: TrendingUp, component: () => <NeuralNetworkVisualization /> }
+  { id: 5, title: "Cazuri Clinice", icon: AlertTriangle, component: ClinicalCasesSlide },
+  { id: 6, title: "Integrarea Rețelei", icon: GitBranch, component: NetworkIntegrationSlide },
+  { id: 7, title: "Arhitectura Detaliată", icon: TrendingUp, component: () => <NeuralNetworkVisualization /> },
+  { id: 8, title: "Performanța Finală", icon: Award, component: PerformanceSlide }
 ];
 
 const FlipChart = () => {

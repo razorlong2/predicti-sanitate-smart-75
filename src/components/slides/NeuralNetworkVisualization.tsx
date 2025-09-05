@@ -227,8 +227,17 @@ const NeuralNetworkVisualization = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentScenario, setCurrentScenario] = useState<number | null>(null);
 
-  // Simplified network structure: 5 → 3 → 3
-  const layers = {
+  // Enhanced network structure: 47 → 64 → 32 → 16 → 8 → 3
+  const layers = [
+    { name: "Input Layer", neurons: 47, color: "from-blue-400 to-blue-600", description: "Parametri clinici" },
+    { name: "Hidden 1", neurons: 64, color: "from-purple-400 to-purple-600", description: "Extracție" },
+    { name: "Hidden 2", neurons: 32, color: "from-pink-400 to-pink-600", description: "Agregare" },
+    { name: "Hidden 3", neurons: 16, color: "from-orange-400 to-orange-600", description: "Rafinare" },
+    { name: "Hidden 4", neurons: 8, color: "from-red-400 to-red-600", description: "Clasificare" },
+    { name: "Output", neurons: 3, color: "from-green-400 to-green-600", description: "Risc IAAM" }
+  ];
+
+  const networkLayers = {
     input: Array.from({ length: 5 }, (_, i) => ({
       id: `input-${i}`,
       x: 150,
@@ -237,18 +246,34 @@ const NeuralNetworkVisualization = () => {
       index: i,
       label: ['Date pacient', 'Analize laborator', 'Dispozitive medicale', 'Istoric medical', 'Durata internării'][i]
     })),
-    hidden: Array.from({ length: 3 }, (_, i) => ({
-      id: `hidden-${i}`,
-      x: 450,
-      y: 150 + i * 100,
+    hidden1: Array.from({ length: 4 }, (_, i) => ({
+      id: `hidden1-${i}`,
+      x: 320,
+      y: 140 + i * 80,
       layer: 'hidden',
       index: i,
-      label: ['Analiză primară', 'Identificare pattern', 'Sinteză finală'][i]
+      label: ['Extracție 1', 'Extracție 2', 'Extracție 3', 'Extracție 4'][i]
+    })),
+    hidden2: Array.from({ length: 3 }, (_, i) => ({
+      id: `hidden2-${i}`,
+      x: 480,
+      y: 180 + i * 80,
+      layer: 'hidden',
+      index: i,
+      label: ['Agregare 1', 'Agregare 2', 'Agregare 3'][i]
+    })),
+    hidden3: Array.from({ length: 2 }, (_, i) => ({
+      id: `hidden3-${i}`,
+      x: 640,
+      y: 220 + i * 80,
+      layer: 'hidden',
+      index: i,
+      label: ['Rafinare 1', 'Rafinare 2'][i]
     })),
     output: Array.from({ length: 3 }, (_, i) => ({
       id: `output-${i}`,
-      x: 750,
-      y: 150 + i * 100,
+      x: 800,
+      y: 180 + i * 80,
       layer: 'output',
       index: i,
       label: ['Risc IAAM', 'Tip probabil infecție', 'Recomandare urgență'][i],
@@ -256,7 +281,7 @@ const NeuralNetworkVisualization = () => {
     }))
   };
 
-  const allNeurons = [...layers.input, ...layers.hidden, ...layers.output];
+  const allNeurons = [...networkLayers.input, ...networkLayers.hidden1, ...networkLayers.hidden2, ...networkLayers.hidden3, ...networkLayers.output];
 
   const simulateScenario = (scenarioId: number) => {
     setIsAnimating(true);
@@ -266,11 +291,13 @@ const NeuralNetworkVisualization = () => {
     const scenario = scenarios[scenarioId - 1];
     const riskLevel = scenario.riskEvolution[2]; // Final risk level
 
-    // Progressive activation for simplified network
+    // Progressive activation for enhanced network
     const activationSequence = [
-      { delay: 0, neurons: layers.input.map(n => n.id) },
-      { delay: 600, neurons: layers.hidden.map(n => n.id) },
-      { delay: 1200, neurons: [layers.output[Math.floor(riskLevel / 35)].id] }
+      { delay: 0, neurons: networkLayers.input.map(n => n.id) },
+      { delay: 400, neurons: networkLayers.hidden1.map(n => n.id) },
+      { delay: 800, neurons: networkLayers.hidden2.map(n => n.id) },
+      { delay: 1200, neurons: networkLayers.hidden3.map(n => n.id) },
+      { delay: 1600, neurons: [networkLayers.output[Math.floor(riskLevel / 35)].id] }
     ];
 
     activationSequence.forEach(step => {
@@ -295,8 +322,10 @@ const NeuralNetworkVisualization = () => {
     const connections: Array<{ x1: number; y1: number; x2: number; y2: number; isActive: boolean }> = [];
     
     const layerPairs = [
-      { from: layers.input, to: layers.hidden },
-      { from: layers.hidden, to: layers.output }
+      { from: networkLayers.input, to: networkLayers.hidden1 },
+      { from: networkLayers.hidden1, to: networkLayers.hidden2 },
+      { from: networkLayers.hidden2, to: networkLayers.hidden3 },
+      { from: networkLayers.hidden3, to: networkLayers.output }
     ];
 
     layerPairs.forEach(({ from, to }) => {

@@ -125,10 +125,28 @@ const MeasurementSlide = () => {
         </div>
       </div>
 
-      {/* Additional Info Section */}
+      {/* Metodologie Enhanced Section */}
       <div className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-2xl p-8 border border-blue-200 animate-fade-in" style={{animationDelay: '0.6s'}}>
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-6">
           <h3 className="text-xl font-bold text-gray-800">Metodologie de Validare</h3>
+          
+          {/* Enhanced methodology */}
+          <div className="grid md:grid-cols-3 gap-4 text-sm mb-6">
+            <div className="bg-white/70 rounded-lg p-4 space-y-2">
+              <div className="font-semibold text-blue-700">Stratificare IAAM:</div>
+              <div className="text-gray-700">VAP, CLABSI, CAUTI, SSI</div>
+            </div>
+            <div className="bg-white/70 rounded-lg p-4 space-y-2">
+              <div className="font-semibold text-green-700">Cross-validation:</div>
+              <div className="text-gray-700">10-fold × 100 iterații</div>
+            </div>
+            <div className="bg-white/70 rounded-lg p-4 space-y-2">
+              <div className="font-semibold text-orange-700">Calibrare probabilități:</div>
+              <div className="text-gray-700">Platt scaling</div>
+            </div>
+          </div>
+          
+          {/* Original table */}
           <div className="grid md:grid-cols-2 gap-6 text-sm">
             <div className="space-y-2">
               <div className="flex items-center justify-between p-3 bg-white/70 rounded-lg">
@@ -149,6 +167,41 @@ const MeasurementSlide = () => {
               <div className="flex items-center justify-between p-3 bg-white/70 rounded-lg">
                 <span className="font-semibold text-red-700">Ținta de implementare:</span>
                 <span className="text-gray-700">2025</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Distribuție cazuri */}
+          <div className="mt-6 bg-gradient-to-r from-gray-50 to-slate-50 rounded-xl p-6 border border-gray-200">
+            <h4 className="text-lg font-bold text-gray-800 mb-4">Distribuție Cazuri</h4>
+            <div className="grid md:grid-cols-2 gap-4 text-sm">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between p-2 bg-white rounded">
+                  <span className="text-red-700">500 IAAM confirmate:</span>
+                  <span className="font-bold">7% prevalență reală</span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-white rounded">
+                  <span className="text-blue-700">VAP:</span>
+                  <span>150 cazuri</span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-white rounded">
+                  <span className="text-green-700">CLABSI:</span>
+                  <span>120 cazuri</span>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between p-2 bg-white rounded">
+                  <span className="text-orange-700">CAUTI:</span>
+                  <span>180 cazuri</span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-white rounded">
+                  <span className="text-purple-700">SSI:</span>
+                  <span>50 cazuri</span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-white rounded">
+                  <span className="text-gray-700">Balansare:</span>
+                  <span>SMOTE pentru training</span>
+                </div>
               </div>
             </div>
           </div>
