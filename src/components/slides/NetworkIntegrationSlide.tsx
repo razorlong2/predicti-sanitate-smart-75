@@ -52,8 +52,8 @@ const NetworkIntegrationSlide = () => {
               </div>
               
               <div className="bg-white border border-blue-200 rounded-lg p-3 hover-scale animate-fade-in" style={{animationDelay: '0.4s'}}>
-                <div className="text-sm font-semibold text-blue-700">PCT:</div>
-                <div className="text-lg font-bold">12 ng/ml</div>
+                <div className="text-sm font-semibold text-blue-700">Data internării:</div>
+                <div className="text-lg font-bold">15.03.2024</div>
               </div>
               
               <div className="bg-white border border-blue-200 rounded-lg p-3 hover-scale animate-fade-in" style={{animationDelay: '0.5s'}}>
@@ -62,8 +62,8 @@ const NetworkIntegrationSlide = () => {
               </div>
               
               <div className="bg-white border border-blue-200 rounded-lg p-3 hover-scale animate-fade-in" style={{animationDelay: '0.6s'}}>
-                <div className="text-sm font-semibold text-blue-700">Vârstă:</div>
-                <div className="text-lg font-bold">67 ani</div>
+                <div className="text-sm font-semibold text-blue-700">Data recoltării probei:</div>
+                <div className="text-lg font-bold">20.03.2024</div>
               </div>
             </div>
           </div>

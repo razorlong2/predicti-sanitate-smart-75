@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Brain, Activity, TrendingUp, Play, AlertTriangle, ArrowRight } from 'lucide-react';
+import { Brain, Activity, TrendingUp, Play, AlertTriangle, ArrowRight, Shield, Heart } from 'lucide-react';
 
 interface ScenarioData {
   id: number;
@@ -381,22 +381,37 @@ const NeuralNetworkVisualization = () => {
           </button>
         </div>
 
-        {/* Neural Network Visualization - Simplified structure */}
-        <div className="relative w-[90%] mx-auto h-[500px] bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 rounded-2xl border border-blue-200 overflow-hidden shadow-2xl backdrop-blur-sm hover-scale tilt-3d">
-          {/* Layer Labels - ABOVE nodes, simplified structure */}
-          <div className="absolute top-4 left-[120px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-blue-200">
-            <div className="text-sm font-bold text-blue-900">Date Clinice (5 categorii)</div>
-            <div className="text-xs text-gray-600 mt-1">Pacient, Analize, Dispozitive...</div>
+        {/* Neural Network Visualization - Enhanced structure with 4 hidden layers */}
+        <div className="relative w-full mx-auto h-[600px] bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 rounded-2xl border border-blue-200 overflow-hidden shadow-2xl backdrop-blur-sm hover-scale tilt-3d">
+          {/* Enhanced Layer Labels for 6-layer architecture */}
+          <div className="absolute top-4 left-[80px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-blue-200">
+            <div className="text-sm font-bold text-blue-900">Input (47 param)</div>
+            <div className="text-xs text-gray-600 mt-1">Parametri clinici</div>
           </div>
           
-          <div className="absolute top-4 left-[410px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-green-200">
-            <div className="text-sm font-bold text-green-900">Procesare (3 etape)</div>
-            <div className="text-xs text-gray-600 mt-1">Analiză→Pattern→Sinteză</div>
+          <div className="absolute top-4 left-[220px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-purple-200">
+            <div className="text-sm font-bold text-purple-900">Hidden 1 (64)</div>
+            <div className="text-xs text-gray-600 mt-1">Extracție</div>
           </div>
           
-          <div className="absolute top-4 left-[710px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-red-200">
-            <div className="text-sm font-bold text-red-900">Predicții IAAM</div>
-            <div className="text-xs text-gray-600 mt-1">Risc, Tip, Urgență</div>
+          <div className="absolute top-4 left-[360px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-pink-200">
+            <div className="text-sm font-bold text-pink-900">Hidden 2 (32)</div>
+            <div className="text-xs text-gray-600 mt-1">Agregare</div>
+          </div>
+          
+          <div className="absolute top-4 left-[500px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-orange-200">
+            <div className="text-sm font-bold text-orange-900">Hidden 3 (16)</div>
+            <div className="text-xs text-gray-600 mt-1">Rafinare</div>
+          </div>
+          
+          <div className="absolute top-4 left-[640px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-red-200">
+            <div className="text-sm font-bold text-red-900">Hidden 4 (8)</div>
+            <div className="text-xs text-gray-600 mt-1">Clasificare</div>
+          </div>
+          
+          <div className="absolute top-4 left-[780px] bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-green-200">
+            <div className="text-sm font-bold text-green-900">Output (3)</div>
+            <div className="text-xs text-gray-600 mt-1">Risc IAAM</div>
           </div>
 
           {/* Connections */}
@@ -442,14 +457,16 @@ const NeuralNetworkVisualization = () => {
             </div>
           </div>
 
-          {/* Input Details - Updated for simplified structure */}
-          <div className="absolute left-4 top-[100px] bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-200 text-xs max-w-[200px]">
+          {/* Input Details - Updated for enhanced structure */}
+          <div className="absolute left-4 top-[120px] bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-200 text-xs max-w-[180px]">
             <div className="space-y-1">
-              <div><strong>Node 1:</strong> DATE PACIENT</div>
-              <div><strong>Node 2:</strong> ANALIZE LABORATOR</div>
-              <div><strong>Node 3:</strong> DISPOZITIVE MEDICALE</div>
-              <div><strong>Node 4:</strong> ISTORIC MEDICAL</div>
-              <div><strong>Node 5:</strong> DURATA INTERNĂRII</div>
+              <div><strong>47 parametri:</strong></div>
+              <div>• Date pacient</div>
+              <div>• Analize laborator</div>
+              <div>• Dispozitive medicale</div>
+              <div>• Istoric medical</div>
+              <div>• Durata internării</div>
+              <div>• Markeri inflamatori</div>
             </div>
           </div>
 
@@ -521,82 +538,206 @@ const NeuralNetworkVisualization = () => {
         </div>
       </div>
 
-      {/* Clinical Scenarios */}
+      {/* Clinical Cases from ClinicalCasesSlide */}
       <div className="space-y-6">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-800">Simulări Clinice - 6 Scenarii</h2>
-          <p className="text-sm text-gray-600 mt-2">(Scenarii simulate pentru demonstrație)</p>
+          <h2 className="text-3xl font-bold text-gray-800">Cazuri Clinice Realiste</h2>
+          <p className="text-sm text-gray-600 mt-2">Demonstrația practică a algoritmului de predicție IAAM</p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {scenarios.map((scenario) => (
-            <div
-              key={scenario.id}
-              className={`bg-white rounded-2xl p-6 border-2 cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 ${
-                currentScenario === scenario.id 
-                  ? 'ring-4 ring-blue-400 shadow-2xl border-blue-400 transform scale-105' 
-                  : 'border-gray-200 shadow-md hover:border-blue-300'
-              }`}
-              onClick={() => simulateScenario(scenario.id)}
-            >
-              {/* Header */}
-              <div className="mb-4">
-                <div className="flex items-start space-x-3 mb-2">
-                  <div className={`w-4 h-4 rounded-full ${scenario.color} mt-1 ${
-                    currentScenario === scenario.id ? 'animate-ping' : 'animate-pulse'
-                  }`}></div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-sm text-gray-800 leading-tight">{scenario.title}</h3>
-                    <p className="text-xs text-gray-600 italic mt-1">{scenario.subtitle}</p>
-                  </div>
-                </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          {/* CAZ 1: BACTERIEMIE CATETER */}
+          <div className="bg-red-50 rounded-2xl p-4 border-2 border-red-200 hover-scale animate-fade-in cursor-pointer" onClick={() => simulateScenario(1)}>
+            <div className="flex items-start space-x-3 mb-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center shadow-lg">
+                <Activity className="w-5 h-5 text-white" />
               </div>
-              
-              {/* Details */}
-              <div className="space-y-2 mb-5">
-                {scenario.details.slice(0, 3).map((detail, index) => (
-                  <p key={index} className="text-sm text-gray-700 leading-relaxed">• {detail}</p>
-                ))}
-                <p className="text-xs text-gray-500 italic">(Exemplu pentru testare)</p>
-              </div>
-              
-              {/* Risk Evolution */}
-              <div className="space-y-3">
-                <div className="flex justify-between text-xs font-medium">
-                  <span className="text-gray-700">Evoluție risc:</span>
-                  <span className="text-gray-500">0-72h</span>
-                </div>
-                
-                <div className="grid grid-cols-3 gap-2">
-                  {scenario.riskEvolution.map((risk, index) => (
-                    <div key={index} className="text-center">
-                      <div className="relative h-4 bg-gray-200 rounded-full overflow-hidden">
-                        <div 
-                          className="h-full transition-all duration-1000"
-                          style={{ 
-                            width: `${Math.min(risk, 100)}%`,
-                            backgroundColor: getRiskColor(
-                              risk < 30 ? 'low' : 
-                              risk < 60 ? 'moderate' : 
-                              risk < 80 ? 'high' : 'critical'
-                            )
-                          }}
-                        />
-                      </div>
-                      <div className="text-sm font-bold mt-1">{risk}%</div>
-                      <div className="text-xs text-gray-500">{index * 24}h</div>
-                    </div>
-                  ))}
-                </div>
-                
-                {/* Alert */}
-                   <div className="flex items-center space-x-2 mt-4 p-3 bg-gray-50 rounded-lg border-l-4 border-gray-400 hover:bg-blue-50 transition-colors duration-300">
-                  <AlertTriangle className="w-4 h-4 text-gray-600 flex-shrink-0" />
-                  <span className="text-xs font-medium text-gray-800 leading-tight">{scenario.alert}</span>
-                </div>
+              <div className="flex-1">
+                <h3 className="text-sm font-bold text-gray-800 mb-1">BACTERIEMIE CATETER</h3>
+                <p className="text-xs text-gray-600">Pacientă 67 ani, cancer pancreatic</p>
               </div>
             </div>
-          ))}
+            
+            <div className="space-y-1 mb-3 text-xs">
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 0: Chimio, leucocite 3200</span>
+                <span className="font-bold text-blue-600">15%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 4: Hipotensiune, PCT 12</span>
+                <span className="font-bold text-red-600">78%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-red-100 rounded">
+                <span>Ziua 5: S. epidermidis</span>
+                <span className="font-bold">CONFIRMAT</span>
+              </div>
+            </div>
+            
+            <div className="bg-green-100 border border-green-300 rounded p-2">
+              <p className="text-xs font-semibold text-green-800">✓ Vancomicină la 75% previne sepsisul</p>
+            </div>
+          </div>
+
+          {/* CAZ 2: INFECȚIE URINARĂ */}
+          <div className="bg-blue-50 rounded-2xl p-4 border-2 border-blue-200 hover-scale animate-fade-in cursor-pointer" onClick={() => simulateScenario(2)} style={{animationDelay: '0.1s'}}>
+            <div className="flex items-start space-x-3 mb-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
+                <Shield className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-sm font-bold text-gray-800 mb-1">INFECȚIE URINARĂ</h3>
+                <p className="text-xs text-gray-600">Bărbat 74 ani, AVC, sondă 7 zile</p>
+              </div>
+            </div>
+            
+            <div className="space-y-1 mb-3 text-xs">
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 5: Urină tulbure</span>
+                <span className="font-bold text-blue-600">31%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 7: Febră 38.3°C, urină fetidă</span>
+                <span className="font-bold text-red-600">72%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-red-100 rounded">
+                <span>Ziua 8: Proteus mirabilis</span>
+                <span className="font-bold">CONFIRMAT</span>
+              </div>
+            </div>
+            
+            <div className="bg-green-100 border border-green-300 rounded p-2">
+              <p className="text-xs font-semibold text-green-800">✓ Schimbare sondă la 70% previne urosepsis</p>
+            </div>
+          </div>
+
+          {/* CAZ 3: INFECȚIE PLAGĂ */}
+          <div className="bg-orange-50 rounded-2xl p-4 border-2 border-orange-200 hover-scale animate-fade-in cursor-pointer" onClick={() => simulateScenario(3)} style={{animationDelay: '0.2s'}}>
+            <div className="flex items-start space-x-3 mb-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-700 rounded-xl flex items-center justify-center shadow-lg">
+                <AlertTriangle className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-sm font-bold text-gray-800 mb-1">INFECȚIE PLAGĂ</h3>
+                <p className="text-xs text-gray-600">Femeie 62 ani, bypass gastric</p>
+              </div>
+            </div>
+            
+            <div className="space-y-1 mb-3 text-xs">
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 4: Eritem 3cm periincizional</span>
+                <span className="font-bold text-blue-600">45%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 5: Secreție seroasă, CRP 156</span>
+                <span className="font-bold text-red-600">68%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-red-100 rounded">
+                <span>Ziua 6: E.coli + Enterococcus</span>
+                <span className="font-bold">CONFIRMAT</span>
+              </div>
+            </div>
+            
+            <div className="bg-green-100 border border-green-300 rounded p-2">
+              <p className="text-xs font-semibold text-green-800">✓ Antibioterapie la 65% evită reintervenție</p>
+            </div>
+          </div>
+
+          {/* CAZ 4: VAP PRECOCE */}
+          <div className="bg-green-50 rounded-2xl p-4 border-2 border-green-200 hover-scale animate-fade-in cursor-pointer" onClick={() => simulateScenario(4)} style={{animationDelay: '0.3s'}}>
+            <div className="flex items-start space-x-3 mb-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center shadow-lg">
+                <Heart className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-sm font-bold text-gray-800 mb-1">VAP PRECOCE</h3>
+                <p className="text-xs text-gray-600">Bărbat 52 ani, politraumă</p>
+              </div>
+            </div>
+            
+            <div className="space-y-1 mb-3 text-xs">
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 4: Infiltrat Rx bazal drept</span>
+                <span className="font-bold text-blue-600">51%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 5: Febră 38.8°C, leucocite 16000</span>
+                <span className="font-bold text-red-600">74%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-red-100 rounded">
+                <span>Ziua 6: H. influenzae</span>
+                <span className="font-bold">CONFIRMAT</span>
+              </div>
+            </div>
+            
+            <div className="bg-green-100 border border-green-300 rounded p-2">
+              <p className="text-xs font-semibold text-green-800">✓ Kinetoterapie la 50% reduce VAP cu 40%</p>
+            </div>
+          </div>
+
+          {/* CAZ 5: VAP TARDIVĂ */}
+          <div className="bg-purple-50 rounded-2xl p-4 border-2 border-purple-200 hover-scale animate-fade-in cursor-pointer" onClick={() => simulateScenario(5)} style={{animationDelay: '0.4s'}}>
+            <div className="flex items-start space-x-3 mb-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl flex items-center justify-center shadow-lg">
+                <TrendingUp className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-sm font-bold text-gray-800 mb-1">VAP TARDIVĂ</h3>
+                <p className="text-xs text-gray-600">Femeie 48 ani, ARDS post-COVID</p>
+              </div>
+            </div>
+            
+            <div className="space-y-1 mb-3 text-xs">
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 13: Secreții verzui abundente</span>
+                <span className="font-bold text-blue-600">61%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 14: Instabilitate hemodinamică</span>
+                <span className="font-bold text-red-600">83%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-red-100 rounded">
+                <span>Ziua 15: Acinetobacter XDR</span>
+                <span className="font-bold">CONFIRMAT</span>
+              </div>
+            </div>
+            
+            <div className="bg-green-100 border border-green-300 rounded p-2">
+              <p className="text-xs font-semibold text-green-800">✓ Colistin la 80% reduce mortalitatea 65%→35%</p>
+            </div>
+          </div>
+
+          {/* CAZ 6: CLABSI */}
+          <div className="bg-pink-50 rounded-2xl p-4 border-2 border-pink-200 hover-scale animate-fade-in cursor-pointer" onClick={() => simulateScenario(6)} style={{animationDelay: '0.5s'}}>
+            <div className="flex items-start space-x-3 mb-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-700 rounded-xl flex items-center justify-center shadow-lg">
+                <Brain className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-sm font-bold text-gray-800 mb-1">CLABSI HEMODIALIZĂ</h3>
+                <p className="text-xs text-gray-600">Bărbat 58 ani, IRC, cateter femural</p>
+              </div>
+            </div>
+            
+            <div className="space-y-1 mb-3 text-xs">
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 5: Subfebră intradialitic</span>
+                <span className="font-bold text-blue-600">57%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-white/70 rounded">
+                <span>Ziua 6: Frisoane severe</span>
+                <span className="font-bold text-red-600">81%</span>
+              </div>
+              <div className="flex justify-between p-1 bg-red-100 rounded">
+                <span>Ziua 7: MRSA în hemoculturi</span>
+                <span className="font-bold">CONFIRMAT</span>
+              </div>
+            </div>
+            
+            <div className="bg-green-100 border border-green-300 rounded p-2">
+              <p className="text-xs font-semibold text-green-800">✓ Înlocuire cateter la 75% obligatorie</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -607,7 +748,7 @@ const NeuralNetworkVisualization = () => {
 
       {/* Page Number */}
       <div className="text-center text-sm text-muted-foreground mt-6">
-        <span className="bg-secondary/20 px-3 py-1 rounded-full">5/11</span>
+        <span className="bg-secondary/20 px-3 py-1 rounded-full">7/9</span>
       </div>
     </div>
   );
