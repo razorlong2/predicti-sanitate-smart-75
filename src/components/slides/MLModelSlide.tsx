@@ -42,30 +42,47 @@ const MLModelSlide = () => {
           {/* Hidden Layers */}
           <div className="text-center space-y-4">
             <h3 className="text-xl font-semibold">Hidden Layers</h3>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <div className="w-3 h-3 bg-white/80 rounded-full mx-auto"></div>
-                <div className="w-3 h-3 bg-white/80 rounded-full mx-auto"></div>
-                <div className="w-3 h-3 bg-white/80 rounded-full mx-auto"></div>
-                <div className="w-3 h-3 bg-white/80 rounded-full mx-auto"></div>
+            <div className="grid grid-cols-4 gap-2">
+              {/* Hidden 1 - 64 neurons */}
+              <div className="space-y-1">
+                <div className="text-xs text-white/90 mb-2">H1 (64)</div>
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="w-3 h-3 bg-white/90 rounded-full mx-auto"></div>
+                ))}
+                <div className="text-xs text-white/70">Extracție</div>
               </div>
-              <div className="space-y-2">
-                <div className="w-3 h-3 bg-white/60 rounded-full mx-auto"></div>
-                <div className="w-3 h-3 bg-white/60 rounded-full mx-auto"></div>
-                <div className="w-3 h-3 bg-white/60 rounded-full mx-auto"></div>
-                <div className="w-3 h-3 bg-white/60 rounded-full mx-auto"></div>
+              
+              {/* Hidden 2 - 32 neurons */}
+              <div className="space-y-1">
+                <div className="text-xs text-white/90 mb-2">H2 (32)</div>
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="w-3 h-3 bg-white/75 rounded-full mx-auto"></div>
+                ))}
+                <div className="text-xs text-white/70">Agregare</div>
               </div>
-              <div className="space-y-2">
-                <div className="w-3 h-3 bg-white/40 rounded-full mx-auto"></div>
-                <div className="w-3 h-3 bg-white/40 rounded-full mx-auto"></div>
-                <div className="w-3 h-3 bg-white/40 rounded-full mx-auto"></div>
-                <div className="w-3 h-3 bg-white/40 rounded-full mx-auto"></div>
+              
+              {/* Hidden 3 - 16 neurons */}
+              <div className="space-y-1">
+                <div className="text-xs text-white/90 mb-2">H3 (16)</div>
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="w-3 h-3 bg-white/60 rounded-full mx-auto"></div>
+                ))}
+                <div className="text-xs text-white/70">Rafinare</div>
+              </div>
+              
+              {/* Hidden 4 - 8 neurons */}
+              <div className="space-y-1">
+                <div className="text-xs text-white/90 mb-2">H4 (8)</div>
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="w-3 h-3 bg-white/45 rounded-full mx-auto"></div>
+                ))}
+                <div className="text-xs text-white/70">Clasificare</div>
               </div>
             </div>
-            <div className="space-y-1 text-sm text-white/80">
-              <p>• Procesare în 3 etape</p>
-              <p>• Găsește legături între factori</p>
-              <p>• Combină toate informațiile</p>
+            <div className="space-y-1 text-sm text-white/80 mt-4">
+              <p>• Procesare în 4 etape (Input → H1 → H2 → H3 → H4 → Output)</p>
+              <p>• Găsește legături complexe între factori clinici</p>
+              <p>• Combină și rafinează toate informațiile medical</p>
             </div>
           </div>
 
@@ -82,6 +99,13 @@ const MLModelSlide = () => {
               <p>• Nivel de risc: Mic, Moderat sau Mare</p>
               <p>• Ce tip de infecție ar putea fi</p>
             </div>
+          </div>
+        </div>
+        
+        {/* Technical Parameters */}
+        <div className="mt-6 pt-4 border-t border-white/20">
+          <div className="text-center text-sm text-white/90">
+            <strong>Dropout 0.3 | Batch Normalization | Adam Optimizer | 200 Epochs</strong>
           </div>
         </div>
       </div>

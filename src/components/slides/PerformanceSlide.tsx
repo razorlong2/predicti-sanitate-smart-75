@@ -123,17 +123,16 @@ const PerformanceSlide = () => {
             <h3 className="text-xl font-bold text-yellow-800">NOTĂ IMPORTANTĂ</h3>
             
             <div className="space-y-2 text-sm text-yellow-900">
-              <p><strong>Valorile prezentate sunt ȚINTE propuse pentru sistemul de predicție IAAM.</strong></p>
+              <p><strong>Valorile reprezintă ȚINTE propuse bazate pe literatura internațională.</strong></p>
               
-              <p>Nivelul REAL de predicție va fi stabilit empiric prin:</p>
+              <p>Nivelul REAL pentru România va fi stabilit prin:</p>
               <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>Validare pe 500+ cazuri IAAM confirmate din România</li>
-                <li>Testare în 3 spitale diferite (universitare, județene, municipale)</li>
-                <li>Monitorizare prospectivă 6 luni cu verificare clinică</li>
-                <li>Calibrare praguri decizionale pe populația românească</li>
+                <li>Validare pe 10.000 pacienți (2019-2024)</li>
+                <li>Testare în 3 spitale universitare</li>
+                <li>Calibrare specifică pentru populația română</li>
               </ul>
               
-              <p className="mt-4 font-semibold">Implementarea va începe doar după atingerea țintelor de performanță validate clinic.</p>
+              <p className="mt-4 font-semibold">Implementarea va respecta standardele academice și clinice românești.</p>
             </div>
           </div>
         </div>

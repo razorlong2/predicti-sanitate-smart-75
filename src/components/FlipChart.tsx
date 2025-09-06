@@ -7,7 +7,7 @@ import DataFlowSlide from "./slides/DataFlowSlide";
 import MLModelSlide from "./slides/MLModelSlide";
 import MeasurementSlide from "./slides/MeasurementSlide";
 import ClinicalCasesSlide from "./slides/ClinicalCasesSlide";
-import NetworkIntegrationSlide from "./slides/NetworkIntegrationSlide";
+import PracticalExampleSlide from "./slides/PracticalExampleSlide";
 import NeuralNetworkVisualization from "./slides/NeuralNetworkVisualization";
 import PerformanceSlide from "./slides/PerformanceSlide";
 
@@ -18,7 +18,7 @@ const slides = [
   { id: 3, title: "Modelul ML", icon: Brain, component: MLModelSlide },
   { id: 4, title: "Stabilirea Predicției", icon: Target, component: MeasurementSlide },
   { id: 5, title: "Cazuri Clinice", icon: AlertTriangle, component: ClinicalCasesSlide },
-  { id: 6, title: "Integrarea Rețelei", icon: GitBranch, component: NetworkIntegrationSlide },
+  { id: 6, title: "Exemplu Practic", icon: GitBranch, component: PracticalExampleSlide },
   { id: 7, title: "Arhitectura Detaliată", icon: TrendingUp, component: () => <NeuralNetworkVisualization /> },
   { id: 8, title: "Performanța Finală", icon: Award, component: PerformanceSlide }
 ];
