@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, FileText, Brain, Database, Activity, Target, GitBranch, Shield, TrendingUp, AlertTriangle, Award } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileText, Brain, Database, Activity, Target, GitBranch, Shield, TrendingUp, AlertTriangle, Award, Calculator, BarChart3, DollarSign, Lightbulb } from "lucide-react";
 import TitleSlide from "./slides/TitleSlide";
 import ArchitectureSlide from "./slides/ArchitectureSlide";
 import DataFlowSlide from "./slides/DataFlowSlide";
