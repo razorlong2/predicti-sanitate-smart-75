@@ -21,7 +21,7 @@ const IntroductionSlide = () => {
           </div>
           <h3 className="font-bold text-lg">Contextul Problemei</h3>
           <div className="space-y-2 text-sm text-muted-foreground">
-            <p><strong>Incidența IAAM în România:</strong> 5-8% din internări</p>
+            <p><strong>Incidența IAAM în România:</strong> >5% din internări</p>
             <p><strong>Impact:</strong> mortalitate crescută, costuri majore</p>
             <p><strong>Provocarea:</strong> lipsa predicției timpurii</p>
           </div>
@@ -81,12 +81,12 @@ const IntroductionSlide = () => {
         <div className="grid md:grid-cols-4 gap-6 text-center">
           <div>
             <TrendingUp className="w-8 h-8 mx-auto mb-2" />
-            <div className="text-2xl font-bold">5-8%</div>
+            <div className="text-2xl font-bold">>5%</div>
             <div className="text-sm text-white/80">Incidența IAAM România</div>
           </div>
           <div>
             <AlertTriangle className="w-8 h-8 mx-auto mb-2" />
-            <div className="text-2xl font-bold">2x</div>
+            <div className="text-2xl font-bold">>2x</div>
             <div className="text-sm text-white/80">Creșterea mortalității</div>
           </div>
           <div>

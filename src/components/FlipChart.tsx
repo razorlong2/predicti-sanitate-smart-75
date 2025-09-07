@@ -2,25 +2,29 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, FileText, Brain, Database, Activity, Target, GitBranch, Shield, TrendingUp, AlertTriangle, Award, Calculator, BarChart3, DollarSign, Lightbulb } from "lucide-react";
 import TitleSlide from "./slides/TitleSlide";
-import ArchitectureSlide from "./slides/ArchitectureSlide";
-import DataFlowSlide from "./slides/DataFlowSlide";
-import MLModelSlide from "./slides/MLModelSlide";
-import MeasurementSlide from "./slides/MeasurementSlide";
-import ClinicalCasesSlide from "./slides/ClinicalCasesSlide";
-import PracticalExampleSlide from "./slides/PracticalExampleSlide";
+import IntroductionSlide from "./slides/IntroductionSlide";
+import TheoreticalFoundationSlide from "./slides/TheoreticalFoundationSlide";
+import MethodologySlide from "./slides/MethodologySlide";
 import NeuralNetworkVisualization from "./slides/NeuralNetworkVisualization";
-import PerformanceSlide from "./slides/PerformanceSlide";
+import ClinicalCasesSlide from "./slides/ClinicalCasesSlide";
+import PreliminaryResultsSlide from "./slides/PreliminaryResultsSlide";
+import LimitationsSlide from "./slides/LimitationsSlide";
+import InnovationContributionSlide from "./slides/InnovationContributionSlide";
+import ConclusionsSlide from "./slides/ConclusionsSlide";
+import PresentationSpeechSlide from "./slides/PresentationSpeechSlide";
 
 const slides = [
   { id: 0, title: "Titlu", icon: FileText, component: TitleSlide },
-  { id: 1, title: "Arhitectura Sistemului", icon: Database, component: ArchitectureSlide },
-  { id: 2, title: "Fluxul de Date", icon: Activity, component: DataFlowSlide },
-  { id: 3, title: "Modelul ML", icon: Brain, component: MLModelSlide },
-  { id: 4, title: "Stabilirea Predicției", icon: Target, component: MeasurementSlide },
+  { id: 1, title: "Introducere", icon: Lightbulb, component: IntroductionSlide },
+  { id: 2, title: "Fundamentare", icon: Database, component: TheoreticalFoundationSlide },
+  { id: 3, title: "Metodologie", icon: Calculator, component: MethodologySlide },
+  { id: 4, title: "Algoritm ML", icon: Brain, component: () => <NeuralNetworkVisualization /> },
   { id: 5, title: "Cazuri Clinice", icon: AlertTriangle, component: ClinicalCasesSlide },
-  { id: 6, title: "Exemplu Practic", icon: GitBranch, component: PracticalExampleSlide },
-  { id: 7, title: "Arhitectura Detaliată", icon: TrendingUp, component: () => <NeuralNetworkVisualization /> },
-  { id: 8, title: "Performanța Finală", icon: Award, component: PerformanceSlide }
+  { id: 6, title: "Rezultate", icon: BarChart3, component: PreliminaryResultsSlide },
+  { id: 7, title: "Limitări", icon: Shield, component: LimitationsSlide },
+  { id: 8, title: "Contribuție", icon: Award, component: InnovationContributionSlide },
+  { id: 9, title: "Concluzii", icon: Target, component: ConclusionsSlide },
+  { id: 10, title: "Speech", icon: GitBranch, component: PresentationSpeechSlide }
 ];
 
 const FlipChart = () => {

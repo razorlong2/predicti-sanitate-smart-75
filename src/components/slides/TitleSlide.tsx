@@ -7,9 +7,12 @@ const TitleSlide = () => {
         {/* Main Title */}
         <div className="space-y-4">
           
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-medical bg-clip-text text-transparent leading-tight">
-            Cercetări privind dezvoltarea unor modele eficiente de digitalizare a activităților din epidemiologie
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-medical bg-clip-text text-transparent leading-tight">
+            Sistem Predictiv Machine Learning pentru Infecțiile Asociate Asistenței Medicale
           </h1>
+          <p className="text-xl text-muted-foreground mt-4">
+            Dezvoltarea unei metodologii de analiză a riscului în spitalele românești
+          </p>
         </div>
 
         {/* Key Features */}

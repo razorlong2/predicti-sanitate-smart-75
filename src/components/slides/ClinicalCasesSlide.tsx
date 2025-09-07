@@ -179,21 +179,21 @@ const ClinicalCasesSlide = () => {
       </div>
 
       {/* Summary Statistics */}
-      <div className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-2xl p-8 border border-blue-200 animate-fade-in" style={{animationDelay: '0.8s'}}>
+      <div className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-2xl p-6 border border-blue-200 animate-fade-in" style={{animationDelay: '0.8s'}}>
         <div className="text-center space-y-4">
           <h3 className="text-xl font-bold text-gray-800">Rezultate Demonstrative</h3>
-          <div className="grid md:grid-cols-3 gap-6 text-sm">
-            <div className="bg-white/70 rounded-lg p-4">
-              <div className="text-2xl font-bold text-green-600 mb-2">83%</div>
-              <div className="text-gray-700">Acuratețe predicție la pragul 70%</div>
+          <div className="grid md:grid-cols-3 gap-4 text-sm">
+            <div className="bg-white/70 rounded-lg p-3">
+              <div className="text-2xl font-bold text-green-600 mb-2">>80%</div>
+              <div className="text-gray-700">Acuratețe țintă</div>
             </div>
-            <div className="bg-white/70 rounded-lg p-4">
+            <div className="bg-white/70 rounded-lg p-3">
               <div className="text-2xl font-bold text-blue-600 mb-2">24-48h</div>
               <div className="text-gray-700">Timp mediu alertă precoce</div>
             </div>
-            <div className="bg-white/70 rounded-lg p-4">
-              <div className="text-2xl font-bold text-orange-600 mb-2">65%</div>
-              <div className="text-gray-700">Reducere costuri prin prevenție</div>
+            <div className="bg-white/70 rounded-lg p-3">
+              <div className="text-2xl font-bold text-orange-600 mb-2">>50%</div>
+              <div className="text-gray-700">Reducere costuri țintă</div>
             </div>
           </div>
         </div>
