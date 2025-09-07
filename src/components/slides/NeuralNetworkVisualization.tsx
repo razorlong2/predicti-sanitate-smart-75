@@ -289,94 +289,15 @@ const NeuralNetworkVisualization = () => {
     setActiveNeurons(new Set());
 
     const scenario = scenarios[scenarioId - 1];
-    const riskLevel = scenario.riskEvolution[2];
-    
-    // Activare selectivă de neuroni bazată pe tipul de caz
-    const getActiveNeuronsForScenario = (id: number) => {
-      switch(id) {
-        case 1: // Bacteriemie cateter
-          return {
-            input: [0, 1, 2, 4], // Temp, CRP, PCT, zile cateter
-            hidden1: [0, 1, 5, 8], // Neuroni specifici pentru infecții vasculare
-            hidden2: [0, 2, 4], // Agregare risc vascular
-            hidden3: [0, 1], // Clasificare risc crescut
-            output: [0] // Risc IAAM
-          };
-        case 2: // Infecție urinară
-          return {
-            input: [0, 3, 4], // Temp, istoric, zile sondă
-            hidden1: [2, 3, 6, 9], // Neuroni pentru infecții urinare
-            hidden2: [1, 2], // Agregare risc urinar
-            hidden3: [0], // Clasificare moderată
-            output: [0]
-          };
-        case 3: // Infecție plagă
-          return {
-            input: [0, 1, 2], // Temp, CRP, PCT
-            hidden1: [1, 4, 7, 10], // Neuroni pentru infecții chirurgicale
-            hidden2: [0, 1, 2], // Agregare risc chirurgical
-            hidden3: [1], // Clasificare crescută
-            output: [0]
-          };
-        case 4: // VAP precoce
-          return {
-            input: [0, 1, 3, 4], // Temp, CRP, istoric, zile
-            hidden1: [3, 5, 8, 11], // Neuroni pentru VAP
-            hidden2: [1, 2], // Agregare risc pulmonar
-            hidden3: [0, 1], // Clasificare crescută
-            output: [0]
-          };
-        case 5: // VAP tardivă
-          return {
-            input: [0, 1, 2, 4], // Toți parametrii critici
-            hidden1: [0, 2, 6, 9, 12], // Neuroni pentru VAP tardivă
-            hidden2: [0, 1, 2], // Agregare complexă
-            hidden3: [0, 1], // Clasificare critică
-            output: [0]
-          };
-        case 6: // CLABSI
-          return {
-            input: [0, 1, 4], // Temp, CRP, zile cateter
-            hidden1: [1, 3, 7, 13], // Neuroni pentru CLABSI
-            hidden2: [0, 2], // Agregare risc CLABSI
-            hidden3: [1], // Clasificare crescută
-            output: [0]
-          };
-        default:
-          return {
-            input: [0, 1, 2],
-            hidden1: [0, 1, 2],
-            hidden2: [0, 1],
-            hidden3: [0],
-            output: [0]
-          };
-      }
-    };
+    const riskLevel = scenario.riskEvolution[2]; // Final risk level
 
-    const activePattern = getActiveNeuronsForScenario(scenarioId);
-    
-    // Activare progresivă selectivă
+    // Progressive activation for enhanced network
     const activationSequence = [
-      { 
-        delay: 0, 
-        neurons: activePattern.input.map(i => networkLayers.input[i]?.id).filter(Boolean)
-      },
-      { 
-        delay: 400, 
-        neurons: activePattern.hidden1.map(i => networkLayers.hidden1[i]?.id).filter(Boolean)
-      },
-      { 
-        delay: 800, 
-        neurons: activePattern.hidden2.map(i => networkLayers.hidden2[i]?.id).filter(Boolean)
-      },
-      { 
-        delay: 1200, 
-        neurons: activePattern.hidden3.map(i => networkLayers.hidden3[i]?.id).filter(Boolean)
-      },
-      { 
-        delay: 1600, 
-        neurons: activePattern.output.map(i => networkLayers.output[i]?.id).filter(Boolean)
-      }
+      { delay: 0, neurons: networkLayers.input.map(n => n.id) },
+      { delay: 400, neurons: networkLayers.hidden1.map(n => n.id) },
+      { delay: 800, neurons: networkLayers.hidden2.map(n => n.id) },
+      { delay: 1200, neurons: networkLayers.hidden3.map(n => n.id) },
+      { delay: 1600, neurons: [networkLayers.output[Math.floor(riskLevel / 35)].id] }
     ];
 
     activationSequence.forEach(step => {
