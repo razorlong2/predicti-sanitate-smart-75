@@ -250,6 +250,7 @@ const PreliminaryResultsSlide = () => {
         </div>
       </div>
     </div>
+  )
   );
 };
 
